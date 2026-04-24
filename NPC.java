@@ -1,30 +1,66 @@
 /**
- * Classe concreta per i PNG (personaggi non giocanti).
- *
- * <p><b>Responsabilità:</b> fornire dialoghi fissi o ramificati e interazioni con il giocatore.</p>
- *
- * <p><b>Design:</b> estende Personaggio. Ogni NPC è associato a un luogo (gestito in Gioco).</p>
+ * Rappresenta un personaggio non giocante (NPC).
+ * Ogni NPC ha un dialogo base e può avere una missione e un indizio da dare al giocatore.
  */
 public class NPC extends Personaggio {
-    private final String dialogoBase;
 
-    public NPC(String nome, String descrizione, String dialogoBase) {
-        super(nome, descrizione, 50); // salute NPC (per futuri combattimenti)
+    private final String dialogoBase;
+    private Missione missione;
+    private Indizio indizio;
+
+    public NPC(String nome, String descrizione, String dialogoBase){
+        super(nome, descrizione, 50);
         this.dialogoBase = dialogoBase;
+        this.missione = null;
+        this.indizio = null;
     }
 
     /**
-     * Override: ogni NPC ha un dialogo unico (basato sull'idea iniziale: Eoin, Michela, ecc.).
+     * Restituisce il dialogo base dell'NPC.
      */
     @Override
-    public String parla() {
+    public String parla(){
         return dialogoBase;
     }
 
     /**
-     * Metodo per dialogo avanzato (pronto per estensione con scelte multiple via Leggi.java).
+     * L'NPC assegna una missione al giocatore e la avvia subito.
      */
-    public String parlaConScelta() {
+    public void assegnaMissione(Missione m){
+        this.missione = m;
+        System.out.println(nome + " ti assegna una missione!");
+        m.avviaMissione();
+    }
+
+    /**
+     * L'NPC consegna il suo indizio al giocatore (se ce l'ha).
+     */
+    public void consegnaIndizio(Personaggio giocatore){
+        if (indizio != null) {
+            System.out.println(nome + " ti sussurra un segreto...");
+            System.out.println(indizio.esamina());
+        } else {
+            System.out.println(nome + ": Non ho altri segreti da rivelare.");
+        }
+    }
+
+    public void setIndizio(Indizio indizio) {
+        this.indizio = indizio;
+    }
+
+    public Missione getMissione() {
+        return missione;
+    }
+
+    public Indizio getIndizio() {
+        return indizio;
+    }
+
+    /**
+     * Dialogo interattivo: il giocatore sceglie come rispondere all'NPC.
+     * Usa Leggi.java per leggere l'input.
+     */
+    public String parlaConScelta(){
         System.out.println(parla());
         System.out.print("Rispondi (1=Chiedi info / 2=Saluta): ");
         int scelta = Leggi.unInt();

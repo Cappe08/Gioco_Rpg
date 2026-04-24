@@ -1,16 +1,13 @@
 /**
- * Classe concreta che rappresenta il protagonista (Rory) del gioco.
- *
- * <p><b>Responsabilità:</b> gestire inventario, posizione (delegata a Movimento), stato del giocatore.</p>
- *
- * <p><b>Design:</b> estende Personaggio, composizione con Inventario (HAS-A).
- * Usa polimorfismo per override di parla().</p>
+ * Rappresenta il protagonista del gioco (Rory).
+ * Estende Personaggio e gestisce l'inventario degli oggetti.
  */
 public class Protagonista extends Personaggio {
+
     private final Inventario inventario;
 
-    public Protagonista(String nome, String descrizione) {
-        super(nome, descrizione, 100); // salute iniziale
+    public Protagonista(String nome, String descrizione){
+        super(nome, descrizione, 100);
         this.inventario = new Inventario();
     }
 
@@ -19,23 +16,23 @@ public class Protagonista extends Personaggio {
     }
 
     /**
-     * Override: dialogo personalizzato del protagonista (per interazioni future).
+     * Dialogo del protagonista (usato per interazioni future).
      */
     @Override
-    public String parla() {
+    public String parla(){
         return "Sono Rory, l'avventuriero! Sto esplorando Dublino medievale per scoprire il mistero del castello.";
     }
 
     /**
-     * Metodo specifico per raccogliere oggetti.
+     * Il protagonista raccoglie un oggetto e lo aggiunge all'inventario.
      */
-    public void raccogli(Oggetto oggetto) {
+    public void raccogli(Oggetto oggetto){
         inventario.aggiungi(oggetto);
         System.out.println("Hai raccolto: " + oggetto);
     }
 
     /**
-     * Stampa stato completo del protagonista.
+     * Stampa tutte le informazioni sul protagonista.
      */
     public void stampaStato() {
         System.out.println("=== " + nome + " ===");
