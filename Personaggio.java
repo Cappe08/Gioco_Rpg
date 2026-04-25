@@ -53,7 +53,7 @@ public abstract class Personaggio {
         if (danno > 0) {
             System.out.println(nome + " ha subito " + danno + " danni! Salute rimasta: " + salute);
         } else {
-            System.out.println(nome + " si è curato di " + (-danno) + " punti! Salute: " + salute);
+            System.out.println(nome + " si e curato di " + (-danno) + " punti! Salute: " + salute);
         }
     }
 

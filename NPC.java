@@ -1,6 +1,6 @@
 /**
  * Rappresenta un personaggio non giocante (NPC).
- * Ogni NPC ha un dialogo base e può avere una missione e un indizio da dare al giocatore.
+ * Ogni NPC ha un dialogo base e puo avere una missione e un indizio da dare al giocatore.
  */
 public class NPC extends Personaggio {
 

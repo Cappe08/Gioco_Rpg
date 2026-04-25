@@ -40,21 +40,21 @@ public class GestoreInput {
      *         non corrisponde a nessuna direzione valida
      */
     public Direzione leggiDirezione() {
-        System.out.print("Dove vuoi andare? (n=su, s=giu, e=dx, o=sx): ");
+        System.out.print("Dove vuoi andare? (w=su, s=giu, d=dx, a=sx): ");
         char c = Leggi.unChar();
 
         switch (c) {
             case 'w':
             case 'W':
                 return Direzione.NORD;
-            case 'a':
-            case 'A':
+            case 's':
+            case 'S':
                 return Direzione.SUD;
             case 'd':
             case 'D':
                 return Direzione.EST;
-            case 's':
-            case 'S':
+            case 'a':
+            case 'A':
                 return Direzione.OVEST;
             default:
                 throw new IllegalArgumentException(

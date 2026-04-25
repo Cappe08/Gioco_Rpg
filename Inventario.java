@@ -1,7 +1,7 @@
 /**
  * Classe che gestisce l'inventario del protagonista.
  *
- * <p><b>Responsabilità:</b> contenere e manipolare oggetti (usa array o ArrayList come nelle dispense 1.3 Array e 4.2 Strutture dati).</p>
+ * <p><b>Responsabilita:</b> contenere e manipolare oggetti (usa array o ArrayList come nelle dispense 1.3 Array e 4.2 Strutture dati).</p>
  *
  * <p><b>Design:</b> composizione con Protagonista. Limite massimo di oggetti per realismo RPG.</p>
  */
@@ -34,6 +34,13 @@ public class Inventario {
         for (int i = 0; i < oggetti.size(); i++) {
             System.out.println((i + 1) + ". " + oggetti.get(i));
         }
+    }
+
+    public Oggetto get(int indice) {
+        if (indice >= 0 && indice < oggetti.size()) {
+            return oggetti.get(indice);
+        }
+        return null;
     }
 
     public Oggetto usa(int indice) {

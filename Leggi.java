@@ -1,6 +1,6 @@
 import java.io.*;
 
-class Leggi {
+public class Leggi {
   private static BufferedReader br = 
     new BufferedReader(new InputStreamReader(System.in));
   private static String s;
@@ -31,7 +31,12 @@ class Leggi {
     }
   }
   public static int unInt() {
+    try {
       return Integer.parseInt(input());
+    } catch (NumberFormatException e) {
+      System.err.println("Errore: "+s+" non e' un intero");
+      return -1;
+    }
   }
   public static long unLong() {
     try {

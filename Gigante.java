@@ -1,6 +1,6 @@
 /**
- * Il Gigante è il nemico finale del gioco.
- * Ha più salute degli altri nemici e può usare un attacco speciale potente.
+ * Il Gigante e il nemico finale del gioco.
+ * Ha piu salute degli altri nemici e puo usare un attacco speciale potente.
  */
 public class Gigante extends Nemico{
 
@@ -9,7 +9,7 @@ public class Gigante extends Nemico{
     }
 
     /**
-     * Attacco speciale del Gigante: fa molti più danni del normale.
+     * Attacco speciale del Gigante: fa molti piu danni del normale.
      */
     public void attaccoSpeciale(Personaggio giocatore){
         System.out.println("Il Gigante urla e usa la SCHIACCIATA DEVASTANTE!");
@@ -18,10 +18,10 @@ public class Gigante extends Nemico{
     }
 
     /**
-     * Il Gigante ha un dialogo più minaccioso.
+     * Il Gigante ha un dialogo piu minaccioso.
      */
     @Override
     public String parla(){
-        return "GIGANTE: Ah ah ah! Nessuno può fermarmi! Questa città è mia per sempre!";
+        return "GIGANTE: Ah ah ah! Nessuno puo fermarmi! Questa citta e mia per sempre!";
     }
 }

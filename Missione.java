@@ -1,6 +1,6 @@
 /**
- * Rappresenta una missione che un NPC può assegnare al giocatore.
- * Quando la missione è completata, il giocatore riceve un indizio come ricompensa.
+ * Rappresenta una missione che un NPC puo assegnare al giocatore.
+ * Quando la missione e completata, il giocatore riceve un indizio come ricompensa.
  */
 public class Missione {
 
@@ -39,8 +39,8 @@ public class Missione {
     }
 
     /**
-     * Restituisce la ricompensa se la missione è stata completata,
-     * altrimenti avvisa che non è ancora finita.
+     * Restituisce la ricompensa se la missione e stata completata,
+     * altrimenti avvisa che non e ancora finita.
      */
     public Indizio daiRicompensa(){
         if (completata) {
