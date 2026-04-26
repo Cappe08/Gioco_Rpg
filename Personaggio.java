@@ -10,15 +10,15 @@ public abstract class Personaggio {
         this.salute = saluteIniziale;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
-    public String getDescrizione() {
+    public String getDescrizione(){
         return descrizione;
     }
 
-    public int getSalute() {
+    public int getSalute(){
         return salute;
     }
 
@@ -44,8 +44,8 @@ public abstract class Personaggio {
      */
     protected void subisciDanno(int danno){
         salute -= danno;
-        if (salute < 0) salute = 0;
-        if (danno > 0) {
+        if(salute < 0) salute = 0;
+        if(danno > 0){
             System.out.println(nome + " ha subito " + danno + " danni! Salute rimasta: " + salute);
         } else {
             System.out.println(nome + " si e curato di " + (-danno) + " punti! Salute: " + salute);
@@ -53,7 +53,7 @@ public abstract class Personaggio {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return nome + " - " + descrizione + " (salute: " + salute + ")";
     }
 }

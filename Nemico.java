@@ -7,7 +7,7 @@ public class Nemico extends Personaggio {
         this.danno = danno;
     }
 
-    public int getDanno() {
+    public int getDanno(){
         return danno;
     }
 

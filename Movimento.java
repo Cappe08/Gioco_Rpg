@@ -16,7 +16,7 @@ public class Movimento {
      */
     public Movimento(Mappa mappa, int xIniziale, int yIniziale){
         this.mappa = mappa;
-        if (!mappa.isAttraversabile(xIniziale, yIniziale)) {
+        if(!mappa.isAttraversabile(xIniziale, yIniziale)){
             throw new IllegalArgumentException(
                     "Posizione iniziale non valida: (" + xIniziale + "," + yIniziale + ")");
         }
@@ -25,11 +25,11 @@ public class Movimento {
         this.gestoreInput = new GestoreInput();
     }
 
-    public int getX() {
+    public int getX(){
         return x;
     }
 
-    public int getY() {
+    public int getY(){
         return y;
     }
 
@@ -74,17 +74,17 @@ public class Movimento {
         int nuovaX = x;
         int nuovaY = y;
 
-        if (direzione == Direzione.NORD){
+        if(direzione == Direzione.NORD){
             nuovaY--;
-        } else if (direzione == Direzione.SUD){
+        } else if(direzione == Direzione.SUD){
             nuovaY++;
-        } else if (direzione == Direzione.EST){
+        } else if(direzione == Direzione.EST){
             nuovaX++;
-        } else if (direzione == Direzione.OVEST){
+        } else if(direzione == Direzione.OVEST){
             nuovaX--;
         }
 
-        if (mappa.isAttraversabile(nuovaX, nuovaY)){
+        if(mappa.isAttraversabile(nuovaX, nuovaY)){
             x = nuovaX;
             y = nuovaY;
             System.out.println("Ti sei spostato in: " + getLuogoCorrente().getNome());

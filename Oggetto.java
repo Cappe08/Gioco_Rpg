@@ -19,20 +19,20 @@ public class Oggetto {
         return consumabile;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
-    public String getDescrizione() {
+    public String getDescrizione(){
         return descrizione;
     }
 
-    public int getValore() {
+    public int getValore(){
         return valore;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return nome + " (" + descrizione + ") - valore: " + valore;
     }
 }

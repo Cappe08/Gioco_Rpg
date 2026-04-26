@@ -8,16 +8,16 @@ public class Luogo {
      * @param nome        il nome visualizzato del luogo (es. "Taverna")
      * @param descrizione la descrizione testuale mostrata al giocatore
      */
-    public Luogo(String nome, String descrizione) {
+    public Luogo(String nome, String descrizione){
         this.nome = nome;
         this.descrizione = descrizione;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
-    public String getDescrizione() {
+    public String getDescrizione(){
         return descrizione;
     }
 
@@ -26,7 +26,7 @@ public class Luogo {
      * Utile per essere stampata direttamente nel terminale.
      */
     @Override
-    public String toString() {
+    public String toString(){
         return nome + " - " + descrizione;
     }
 }

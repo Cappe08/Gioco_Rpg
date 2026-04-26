@@ -10,13 +10,13 @@ public class MotoreEpisodi {
 
     // METODO PUBBLICO PER IL RITARDO (Così Gioco.java può usarlo senza duplicarlo)
     public static void attendi(int millisecondi){
-        try { Thread.sleep(millisecondi); } catch (InterruptedException e) {}
+        try { Thread.sleep(millisecondi); } catch(InterruptedException e){}
     }
 
     // NUOVO METODO GESTISCI INTERAZIONE (Spostato da Gioco.java)
-    public static void gestisciInterazione(String luogo, Protagonista tony, Nemico nemico, Map<String, Nemico> nemici) {
-        if (nemico != null) {
-            if (luogo.equals("Porta della Citta")){
+    public static void gestisciInterazione(String luogo, Protagonista tony, Nemico nemico, Map<String, Nemico> nemici){
+        if(nemico != null){
+            if(luogo.equals("Porta della Citta")){
                 System.out.println("\n[ESAMINA]");
                 attendi(1000);
                 System.out.println("Ti nascondi dietro un carretto rovesciato per studiare la situazione.");
@@ -28,10 +28,10 @@ public class MotoreEpisodi {
                 System.out.println("Finché queste guardie resteranno in vita, l'Ignoto trarrà potere da questo legame energetico per proteggersi...");
                 attendi(2500);
                 System.out.println("\n(Sei pronto a spezzare questa maledizione? Premi 5 per sfoderare l'arma e affrontarli!)");
-            } else if (luogo.equals("Castello")) {
+            } else if(luogo.equals("Castello")){
                 System.out.println("\n[ESAMINA] Il Gigante Spettrale sovrasta le macerie.");
                 attendi(1500);
-                if (nemici.containsKey("Porta della Citta")){
+                if(nemici.containsKey("Porta della Citta")){
                     System.out.println("È circondato da un muro di energia rossa. È INATTACCABILE finché la fonte dell'energia non viene distrutta.");
                     attendi(3000);
                 } else {
@@ -45,19 +45,19 @@ public class MotoreEpisodi {
         }
 
         // LOGICA DEGLI EPISODI
-        if (luogo.equals("Roxy Bar") && !episodioLocandaFatto){
+        if(luogo.equals("Roxy Bar") && !episodioLocandaFatto){
             boolean successo = episodioLocanda(tony);
-            if (successo){
+            if(successo){
                 episodioBarFatto = true;
                 episodioLocandaFatto = true;
             } else {
                 System.out.println("\n[!] Hai fallito. Riposati e riprova! (Premi di nuovo 2)");
             }
         }
-        else if (luogo.equals("Torri") && !episodioTorriFatto){
-            if (episodioBarFatto) {
+        else if(luogo.equals("Torri") && !episodioTorriFatto){
+            if(episodioBarFatto){
                 boolean successo = episodioTorri(tony);
-                if (successo){
+                if(successo){
                     episodioTorriFatto = true;
                 } else {
                     System.out.println("\n[!] Hai perso. Preparati meglio e riprova! (Premi di nuovo 2)");
@@ -67,9 +67,9 @@ public class MotoreEpisodi {
                 System.out.println("Guardia: 'Vasco accetta solo chi si è dimostrato un duro al Roxy Bar. Vattene!'");
             }
         }
-        else if (luogo.equals("Piazza") && !episodioPiazzaFatto){
+        else if(luogo.equals("Piazza") && !episodioPiazzaFatto){
             boolean successo = episodioPiazza(tony);
-            if (successo){
+            if(successo){
                 episodioPiazzaFatto = true;
             } else {
                 System.out.println("\n[!] Hai fallito l'azione. Fai più attenzione e riprova!");
@@ -99,10 +99,10 @@ public class MotoreEpisodi {
         System.out.print("Scegli la tua mossa (1 o 2): ");
         int scelta = Leggi.unInt();
 
-        if (scelta == 1){
+        if(scelta == 1){
             attendi(1000);
             System.out.println("\nMetti mano alla sacca e lanci un paio di monete sul bancone: 'Giro di birra per tutti! E per il signore toscano in fondo, la vostra annata migliore!'");
-            if (tony.tentaAzione("Carisma", 10)){
+            if(tony.tentaAzione("Carisma", 10)){
                 attendi(2500);
                 System.out.println("\nLa locanda esplode in un boato di approvazione. I mercenari alzano i boccali verso di te.");
                 attendi(2000);
@@ -116,7 +116,7 @@ public class MotoreEpisodi {
                 tony.modificaCarisma(5);
                 attendi(2000);
                 return true;
-            } else{
+            } else {
                 attendi(2000);
                 System.out.println("\nLanci le monete, ma una cade a terra rotolando miseramente. Hai i soldi solo per un bicchiere d'acqua sporca.");
                 attendi(2500);
@@ -128,10 +128,10 @@ public class MotoreEpisodi {
                 attendi(2000);
                 return false;
             }
-        } else if (scelta == 2){
+        } else if(scelta == 2){
             attendi(1000);
             System.out.println("\nTi avvicini a passi pesanti. Sferri un pugno violentissimo sul legno del bancone, facendo tremare i boccali di tutta la locanda.");
-            if (tony.tentaAzione("Forza", 10)){
+            if(tony.tentaAzione("Forza", 10)){
                 attendi(2500);
                 System.out.println("\nIl tonfo echeggia nella stanza. Il bar cala in un silenzio tombale.");
                 attendi(2000);
@@ -169,7 +169,7 @@ public class MotoreEpisodi {
         }
     }
 
-    public static boolean episodioPiazza(Protagonista tony) {
+    public static boolean episodioPiazza(Protagonista tony){
         System.out.println("\n=== IL MERCATO DELLE ILLUSIONI ===");
         attendi(1000);
         System.out.println("La Piazza brulica di persone. L'aria è un misto di spezie orientali e fumo denso.");
@@ -185,10 +185,10 @@ public class MotoreEpisodi {
         System.out.print("Scegli la tua mossa (1 o 2): ");
         int scelta = Leggi.unInt();
 
-        if (scelta == 1) {
+        if(scelta == 1){
             attendi(1000);
             System.out.println("\nTi avvicini al banchetto, fingendo interesse per la patetica roccia dipinta che cerca di venderti...");
-            if (tony.tentaAzione("Agilita", 10)) {
+            if(tony.tentaAzione("Agilita", 10)){
                 attendi(1000);
                 System.out.println("\nCon la coda dell'occhio noti una fiala che brilla di luce vera nascosta nella sua manica.");
                 attendi(1000);
@@ -212,10 +212,10 @@ public class MotoreEpisodi {
                 attendi(1000);
                 return false;
             }
-        } else if (scelta == 2) {
+        } else if(scelta == 2){
             attendi(1000);
             System.out.println("\nNon hai tempo per questi giochetti. Afferri Ezio per le vesti logore e lo sollevi da terra con rabbia.");
-            if (tony.tentaAzione("Forza", 15)) {
+            if(tony.tentaAzione("Forza", 15)){
                 attendi(1000);
                 System.out.println("\nGli occhi del mercante si sbarrano per il terrore. I suoi piedi scalciano a vuoto.");
                 attendi(1000);
@@ -249,7 +249,7 @@ public class MotoreEpisodi {
         }
     }
 
-    public static boolean episodioTorri(Protagonista tony) {
+    public static boolean episodioTorri(Protagonista tony){
         System.out.println("\n=== IL GIUDIZIO DELLE TORRI ===");
         attendi(1000);
         System.out.println("Il vento freddo fischia tra le antiche pietre delle Torri di Guardia.");
@@ -276,10 +276,10 @@ public class MotoreEpisodi {
         System.out.print("Scegli la tua mossa (1 o 2): ");
         int scelta = Leggi.unInt();
 
-        if (scelta == 1) {
+        if(scelta == 1){
             attendi(1000);
             System.out.println("\nFai un passo avanti, alzi le mani disarmato e inizi a parlare di libertà, musica e pietà...");
-            if (tony.tentaAzione("Carisma", 15)) {
+            if(tony.tentaAzione("Carisma", 15)){
                 attendi(2000);
                 System.out.println("\nVasco ti ascolta in silenzio, quasi commosso. Poi abbassa l'arma e sbuffa: 'E va bene... mi hai convinto. Ma portateli via prima che cambi idea!'");
                 attendi(3000);
@@ -306,12 +306,12 @@ public class MotoreEpisodi {
                 attendi(2000);
                 return false;
             }
-        } else if (scelta == 2) {
+        } else if(scelta == 2){
             attendi(1000);
             System.out.println("\nSfoderi l'arma con un gesto fulmineo e ti lanci verso il Comandante.");
             attendi(2000);
             System.out.println("Vasco sorride maliziosamente: 'Finalmente un po' di azione! Fammi vedere di che pasta sei fatto!'");
-            if (tony.tentaAzione("Forza", 15)) {
+            if(tony.tentaAzione("Forza", 15)){
                 attendi(2000);
                 System.out.println("\nLo scontro è brutale! Le lame scintillano creando scintille nel cortile, ma la tua potenza è travolgente.");
                 attendi(2500);
@@ -347,7 +347,7 @@ public class MotoreEpisodi {
         }
     }
 
-    public static void preCombattimentoPorta(Protagonista tony, Nemico guardia) {
+    public static void preCombattimentoPorta(Protagonista tony, Nemico guardia){
         System.out.println("\n=== L'IMBOSCATA ALLA PORTA ===");
         attendi(1000);
         System.out.println("Ti avvicini ai pesanti cancelli della Porta della Città.");
@@ -356,9 +356,9 @@ public class MotoreEpisodi {
         attendi(2500);
 
         boolean haChiave = false;
-        for (int i = 0; i < 10; i++) {
+        for(int i = 0; i < 10; i++){
             Oggetto o = tony.getInventario().get(i);
-            if (o != null && o.getNome().equals("Chiave Tattica")) haChiave = true;
+            if(o != null && o.getNome().equals("Chiave Tattica")) haChiave = true;
         }
 
         System.out.println("\n1. [Tattica] Cerca un modo per usare l'ambiente a tuo vantaggio.");
@@ -366,10 +366,10 @@ public class MotoreEpisodi {
         System.out.print("Scegli la tua mossa (1 o 2): ");
         int scelta = Leggi.unInt();
 
-        if (scelta == 1) {
+        if(scelta == 1){
             attendi(1000);
             System.out.println("\nScansi lo sguardo verso le mura e noti un argano arrugginito che regge una vecchia grata di ferro.");
-            if (haChiave) {
+            if(haChiave){
                 attendi(2000);
                 System.out.println("Usi la 'Chiave Tattica' donata da Morgan per sbloccare di scatto l'ingranaggio!");
                 attendi(2000);
@@ -384,10 +384,10 @@ public class MotoreEpisodi {
                 System.out.println("Il rumore allerta le guardie che ti attaccano di sorpresa! Subisci 10 Danni.");
                 tony.subisciDanno(10);
             }
-        } else if (scelta == 2) {
+        } else if(scelta == 2){
             attendi(1000);
             System.out.println("\nCon un urlo di battaglia, ti lanci con ferocia inaudita contro lo schieramento nemico!");
-            if (tony.tentaAzione("Forza", 15)) {
+            if(tony.tentaAzione("Forza", 15)){
                 attendi(2000);
                 System.out.println("Travolgi la prima linea con un impatto devastante, spezzando i loro scudi!");
                 attendi(1500);
@@ -410,7 +410,7 @@ public class MotoreEpisodi {
         attendi(1500);
     }
 
-    public static void combattiBossFinale(Protagonista tony, Nemico boss, Missione m, Map<String, Nemico> nemici, String luogo) {
+    public static void combattiBossFinale(Protagonista tony, Nemico boss, Missione m, Map<String, Nemico> nemici, String luogo){
         System.out.println("\n=======================================================");
         attendi(1500);
         System.out.println("   LO SCONTRO FINALE ALL'ALTARE INSANGUINATO");
@@ -428,30 +428,30 @@ public class MotoreEpisodi {
         attendi(3000);
 
         int turno = 1;
-        while (boss.getSalute() > 0 && tony.getSalute() > 0) {
+        while(boss.getSalute() > 0 && tony.getSalute() > 0){
             System.out.println("\n--- TURNO " + turno + " | Tony: " + tony.getSalute() + " HP | Boss: " + boss.getSalute() + " HP ---");
             attendi(1000);
             System.out.println("1. Attacco Rapido | 2. Assalto (Forza 15) | 3. Provoca (Carisma 15) | 4. Cura (Pozione)");
             System.out.print("Mossa: ");
             int mossa = Leggi.unInt();
 
-            if (mossa == 4) {
+            if(mossa == 4){
                 attendi(1000);
                 System.out.println("\nArretri di un passo, schivando un fendente per un soffio, e cerchi freneticamente nello zaino...");
                 attendi(1500);
                 usaPozioneInCombattimento(tony);
                 attendi(2000);
-            } else if (mossa == 1) {
+            } else if(mossa == 1){
                 attendi(1000);
                 System.out.println("\nScatti in avanti, sfruttando la tua agilità, e sferri una serie di fendenti rapidi per bucare la sua guardia oscura!");
                 attendi(2000);
                 tony.attacca(boss);
                 attendi(2000);
-            } else if (mossa == 2) {
+            } else if(mossa == 2){
                 attendi(1000);
                 System.out.println("\nStringi l'arma con entrambe le mani. I tuoi muscoli si tendono allo spasimo mentre carichi un colpo devastante...");
                 attendi(2500);
-                if (tony.tentaAzione("Forza", 15)) {
+                if(tony.tentaAzione("Forza", 15)){
                     attendi(1000);
                     System.out.println("COLPO DEVASTANTE! La tua lama fende l'aria con un fischio e squarcia in profondità l'armatura spettrale del mostro!");
                     attendi(2500);
@@ -461,11 +461,11 @@ public class MotoreEpisodi {
                     System.out.println("Azione Fallita! L'arma sembra pesare tonnellate. Il Gigante para il tuo colpo goffo con un semplice gesto del braccio.");
                 }
                 attendi(2000);
-            } else if (mossa == 3) {
+            } else if(mossa == 3){
                 attendi(1000);
                 System.out.println("\nPunti la spada verso il mostro e urli a pieni polmoni: 'Sei solo un'ombra codarda nascosta tra le macerie! Non fai paura a nessuno!'");
                 attendi(3000);
-                if (tony.tentaAzione("Carisma", 15)) {
+                if(tony.tentaAzione("Carisma", 15)){
                     attendi(1000);
                     System.out.println("Le tue parole fanno breccia! Il Gigante esita, accecato dall'ira, e la sua aura magica si sfalda perdendo potere! (-15 HP)");
                     attendi(3000);
@@ -481,18 +481,18 @@ public class MotoreEpisodi {
                 attendi(2000);
             }
 
-            if (boss.getSalute() > 0) {
+            if(boss.getSalute() > 0){
                 attendi(1000);
                 System.out.println("\nGli occhi del mostro brillano di malvagità. È il turno del Gigante...");
                 attendi(2000);
 
                 int danno;
-                if (turno % 3 == 0) {
+                if(turno % 3 == 0){
                     danno = 35;
                 } else {
                     danno = 15;
                 }
-                if (turno % 3 == 0) {
+                if(turno % 3 == 0){
                     System.out.println("Il Gigante solleva la sua immensa mazza e la fa schiantare al suolo! Un'onda d'urto di energia oscura ti investe in pieno!");
                 } else {
                     System.out.println("Il Gigante sferra un rapido e violento attacco orizzontale con i suoi artigli d'ombra, cercando di falciarti a metà!");
@@ -505,7 +505,7 @@ public class MotoreEpisodi {
             attendi(2000); // Pausa prima di ricominciare il ciclo
         }
 
-        if (boss.getSalute() <= 0) {
+        if(boss.getSalute() <= 0){
             attendi(1500);
             System.out.println("\n>>> IL GIGANTE CACCIA UN URLO STRAZIANTE CHE FA TREMARE LE FONDAMENTA DEL CASTELLO! <<<");
             attendi(3000);
@@ -524,13 +524,13 @@ public class MotoreEpisodi {
         }
     }
 
-    public static void usaPozioneInCombattimento(Protagonista tony) {
+    public static void usaPozioneInCombattimento(Protagonista tony){
         int idx = -1;
-        for (int i = 0; i < 10; i++) {
+        for(int i = 0; i < 10; i++){
             Oggetto o = tony.getInventario().get(i);
-            if (o != null && o.getNome().toLowerCase().contains("pozione")) { idx = i; break; }
+            if(o != null && o.getNome().toLowerCase().contains("pozione")){ idx = i; break; }
         }
-        if (idx != -1) {
+        if(idx != -1){
             Oggetto p = tony.getInventario().usa(idx);
             tony.subisciDanno(p.getValore());
         } else {

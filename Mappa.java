@@ -11,7 +11,7 @@ public class Mappa {
      * @param altezza   numero di righe (deve essere > 0)
      */
     public Mappa(int larghezza, int altezza){
-        if (larghezza <= 0 || altezza <= 0){
+        if(larghezza <= 0 || altezza <= 0){
             throw new IllegalArgumentException(
                     "Le dimensioni della mappa devono essere positive.");
         }
@@ -30,7 +30,7 @@ public class Mappa {
      *              lasciare la cella vuota (non attraversabile)
      */
     public void posizionaLuogo(int x, int y, Luogo luogo){
-        if (!coordinateValide(x, y)) {
+        if(!coordinateValide(x, y)){
             throw new IllegalArgumentException(
                     "Coordinate fuori dai limiti: (" + x + "," + y + ")");
         }
@@ -46,7 +46,7 @@ public class Mappa {
      *         o le coordinate sono fuori mappa
      */
     public Luogo getLuogo(int x, int y){
-        if (!coordinateValide(x, y)){
+        if(!coordinateValide(x, y)){
             return null;
         }
         return griglia[y][x];

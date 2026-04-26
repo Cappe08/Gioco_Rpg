@@ -36,7 +36,7 @@ public class NPC extends Personaggio {
      * L'NPC consegna il suo indizio al giocatore (se ce l'ha).
      */
     public void consegnaIndizio(Personaggio giocatore){
-        if (indizio != null) {
+        if(indizio != null){
             System.out.println(nome + " ti sussurra un segreto...");
             System.out.println(indizio.esamina());
         } else {
@@ -44,15 +44,15 @@ public class NPC extends Personaggio {
         }
     }
 
-    public void setIndizio(Indizio indizio) {
+    public void setIndizio(Indizio indizio){
         this.indizio = indizio;
     }
 
-    public Missione getMissione() {
+    public Missione getMissione(){
         return missione;
     }
 
-    public Indizio getIndizio() {
+    public Indizio getIndizio(){
         return indizio;
     }
 
@@ -64,7 +64,7 @@ public class NPC extends Personaggio {
         System.out.println(parla());
         System.out.print("Rispondi (1=Chiedi info / 2=Saluta): ");
         int scelta = Leggi.unInt();
-        if (scelta == 1){
+        if(scelta == 1){
             return nome + ": Il castello nasconde un antico segreto... cerca l'Ignoto!";
         }
         return nome + ": Buona fortuna, Rory!";

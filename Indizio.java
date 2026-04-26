@@ -8,23 +8,23 @@ public class Indizio{
         this.descrizione = descrizione;
     }
 
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
-    public String getDescrizione() {
+    public String getDescrizione(){
         return descrizione;
     }
 
     /**
      * Mostra le informazioni sull'indizio.
      */
-    public String esamina() {
+    public String esamina(){
         return "[ Indizio ] " + nome + ": " + descrizione;
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return nome + " - " + descrizione;
     }
 }

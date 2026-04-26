@@ -8,17 +8,17 @@ public class GestoreInput {
      * @throws IllegalArgumentException se il carattere inserito
      *         non corrisponde a nessuna direzione valida
      */
-    public Direzione leggiDirezione() {
+    public Direzione leggiDirezione(){
         System.out.print("Dove vuoi andare? (w=su, s=giu, d=dx, a=sx): ");
         char c = Leggi.unChar();
 
-        if (c == 'w' || c == 'W') {
+        if(c == 'w' || c == 'W'){
             return Direzione.NORD;
-        } else if (c == 's' || c == 'S') {
+        } else if(c == 's' || c == 'S'){
             return Direzione.SUD;
-        } else if (c == 'd' || c == 'D') {
+        } else if(c == 'd' || c == 'D'){
             return Direzione.EST;
-        } else if (c == 'a' || c == 'A') {
+        } else if(c == 'a' || c == 'A'){
             return Direzione.OVEST;
         } else {
             throw new IllegalArgumentException(
@@ -36,11 +36,11 @@ public class GestoreInput {
      *
      * @return il {@link Direzione} scelto dal giocatore (sempre valido)
      */
-    public Direzione leggiDirezioneConRetry() {
-        while (true) {
+    public Direzione leggiDirezioneConRetry(){
+        while(true){
             try {
                 return leggiDirezione();
-            } catch (IllegalArgumentException e) {
+            } catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
                 // Il ciclo continua, permettendo all'utente di riprovare
             }

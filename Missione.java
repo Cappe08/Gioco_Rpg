@@ -10,7 +10,7 @@ public class Missione {
         this.ricompensa = ricompensa;
     }
 
-    public String getDescrizione() {
+    public String getDescrizione(){
         return descrizione;
     }
 
@@ -39,7 +39,7 @@ public class Missione {
      * altrimenti avvisa che non e ancora finita.
      */
     public Indizio daiRicompensa(){
-        if (completata){
+        if(completata){
             System.out.println("Ricevi come ricompensa: " + ricompensa.getNome());
             return ricompensa;
         } else {

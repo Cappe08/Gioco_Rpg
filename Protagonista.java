@@ -14,18 +14,18 @@ public class Protagonista extends Personaggio {
         this.agilita = 10;
     }
 
-    public int getForza() { return forza; }
-    public void modificaForza(int variazione) { this.forza += variazione; }
+    public int getForza(){ return forza; }
+    public void modificaForza(int variazione){ this.forza += variazione; }
 
-    public int getCarisma() { return carisma; }
-    public void modificaCarisma(int variazione) { this.carisma += variazione; }
+    public int getCarisma(){ return carisma; }
+    public void modificaCarisma(int variazione){ this.carisma += variazione; }
 
-    public int getAgilita() { return agilita; }
-    public void modificaAgilita(int variazione) { this.agilita += variazione; }
+    public int getAgilita(){ return agilita; }
+    public void modificaAgilita(int variazione){ this.agilita += variazione; }
 
-    public Inventario getInventario() { return inventario; }
+    public Inventario getInventario(){ return inventario; }
 
-    public void setDannoArma(int nuovoDanno) { this.dannoArma = nuovoDanno; }
+    public void setDannoArma(int nuovoDanno){ this.dannoArma = nuovoDanno; }
 
     /**
      * Sistema di Skill Check Deterministico.
@@ -33,9 +33,9 @@ public class Protagonista extends Personaggio {
      */
     public boolean tentaAzione(String stat, int difficolta){
         int valoreAttuale = 0;
-        if (stat.equalsIgnoreCase("Forza")) valoreAttuale = forza;
-        else if (stat.equalsIgnoreCase("Carisma")) valoreAttuale = carisma;
-        else if (stat.equalsIgnoreCase("Agilita")) valoreAttuale = agilita;
+        if(stat.equalsIgnoreCase("Forza")) valoreAttuale = forza;
+        else if(stat.equalsIgnoreCase("Carisma")) valoreAttuale = carisma;
+        else if(stat.equalsIgnoreCase("Agilita")) valoreAttuale = agilita;
 
         System.out.println("[Controllo " + stat + " | Richiesto: " + difficolta + " | Tuo Livello: " + valoreAttuale + "]");
         return valoreAttuale >= difficolta;
