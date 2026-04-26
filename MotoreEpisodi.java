@@ -9,14 +9,14 @@ public class MotoreEpisodi {
     private static boolean episodioTorriFatto = false;
 
     // METODO PUBBLICO PER IL RITARDO (Così Gioco.java può usarlo senza duplicarlo)
-    public static void attendi(int millisecondi) {
+    public static void attendi(int millisecondi){
         try { Thread.sleep(millisecondi); } catch (InterruptedException e) {}
     }
 
     // NUOVO METODO GESTISCI INTERAZIONE (Spostato da Gioco.java)
     public static void gestisciInterazione(String luogo, Protagonista tony, Nemico nemico, Map<String, Nemico> nemici) {
         if (nemico != null) {
-            if (luogo.equals("Porta della Citta")) {
+            if (luogo.equals("Porta della Citta")){
                 System.out.println("\n[ESAMINA]");
                 attendi(1000);
                 System.out.println("Ti nascondi dietro un carretto rovesciato per studiare la situazione.");
@@ -31,7 +31,7 @@ public class MotoreEpisodi {
             } else if (luogo.equals("Castello")) {
                 System.out.println("\n[ESAMINA] Il Gigante Spettrale sovrasta le macerie.");
                 attendi(1500);
-                if (nemici.containsKey("Porta della Citta")) {
+                if (nemici.containsKey("Porta della Citta")){
                     System.out.println("È circondato da un muro di energia rossa. È INATTACCABILE finché la fonte dell'energia non viene distrutta.");
                     attendi(3000);
                 } else {
@@ -45,19 +45,19 @@ public class MotoreEpisodi {
         }
 
         // LOGICA DEGLI EPISODI
-        if (luogo.equals("Roxy Bar") && !episodioLocandaFatto) {
+        if (luogo.equals("Roxy Bar") && !episodioLocandaFatto){
             boolean successo = episodioLocanda(tony);
-            if (successo) {
+            if (successo){
                 episodioBarFatto = true;
                 episodioLocandaFatto = true;
             } else {
                 System.out.println("\n[!] Hai fallito. Riposati e riprova! (Premi di nuovo 2)");
             }
         }
-        else if (luogo.equals("Torri") && !episodioTorriFatto) {
+        else if (luogo.equals("Torri") && !episodioTorriFatto){
             if (episodioBarFatto) {
                 boolean successo = episodioTorri(tony);
-                if (successo) {
+                if (successo){
                     episodioTorriFatto = true;
                 } else {
                     System.out.println("\n[!] Hai perso. Preparati meglio e riprova! (Premi di nuovo 2)");
@@ -67,9 +67,9 @@ public class MotoreEpisodi {
                 System.out.println("Guardia: 'Vasco accetta solo chi si è dimostrato un duro al Roxy Bar. Vattene!'");
             }
         }
-        else if (luogo.equals("Piazza") && !episodioPiazzaFatto) {
+        else if (luogo.equals("Piazza") && !episodioPiazzaFatto){
             boolean successo = episodioPiazza(tony);
-            if (successo) {
+            if (successo){
                 episodioPiazzaFatto = true;
             } else {
                 System.out.println("\n[!] Hai fallito l'azione. Fai più attenzione e riprova!");
@@ -80,7 +80,7 @@ public class MotoreEpisodi {
         }
     }
 
-    public static boolean episodioLocanda(Protagonista tony) {
+    public static boolean episodioLocanda(Protagonista tony){
         System.out.println("\n=== IL ROXY BAR ===");
         attendi(1000);
         System.out.println("Spingi la pesante porta di quercia ed entri nel Roxy Bar. C'è un fumo denso e un odore acre di birra scura e legno marcio.");
@@ -99,10 +99,10 @@ public class MotoreEpisodi {
         System.out.print("Scegli la tua mossa (1 o 2): ");
         int scelta = Leggi.unInt();
 
-        if (scelta == 1) {
+        if (scelta == 1){
             attendi(1000);
             System.out.println("\nMetti mano alla sacca e lanci un paio di monete sul bancone: 'Giro di birra per tutti! E per il signore toscano in fondo, la vostra annata migliore!'");
-            if (tony.tentaAzione("Carisma", 10)) {
+            if (tony.tentaAzione("Carisma", 10)){
                 attendi(2500);
                 System.out.println("\nLa locanda esplode in un boato di approvazione. I mercenari alzano i boccali verso di te.");
                 attendi(2000);
@@ -116,7 +116,7 @@ public class MotoreEpisodi {
                 tony.modificaCarisma(5);
                 attendi(2000);
                 return true;
-            } else {
+            } else{
                 attendi(2000);
                 System.out.println("\nLanci le monete, ma una cade a terra rotolando miseramente. Hai i soldi solo per un bicchiere d'acqua sporca.");
                 attendi(2500);
@@ -128,10 +128,10 @@ public class MotoreEpisodi {
                 attendi(2000);
                 return false;
             }
-        } else if (scelta == 2) {
+        } else if (scelta == 2){
             attendi(1000);
             System.out.println("\nTi avvicini a passi pesanti. Sferri un pugno violentissimo sul legno del bancone, facendo tremare i boccali di tutta la locanda.");
-            if (tony.tentaAzione("Forza", 10)) {
+            if (tony.tentaAzione("Forza", 10)){
                 attendi(2500);
                 System.out.println("\nIl tonfo echeggia nella stanza. Il bar cala in un silenzio tombale.");
                 attendi(2000);

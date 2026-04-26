@@ -14,7 +14,7 @@ public class Movimento {
      * @throws IllegalArgumentException se la posizione iniziale non
      *         e' attraversabile (fuori mappa o cella vuota)
      */
-    public Movimento(Mappa mappa, int xIniziale, int yIniziale) {
+    public Movimento(Mappa mappa, int xIniziale, int yIniziale){
         this.mappa = mappa;
         if (!mappa.isAttraversabile(xIniziale, yIniziale)) {
             throw new IllegalArgumentException(
@@ -38,7 +38,7 @@ public class Movimento {
      *
      * @return il {@link Luogo} corrente
      */
-    public Luogo getLuogoCorrente() {
+    public Luogo getLuogoCorrente(){
         return mappa.getLuogo(x, y);
     }
 
@@ -55,7 +55,7 @@ public class Movimento {
      * mentre {@link #muovi(Direzione)} e' ideale per i test
      * automatici.</p>
      */
-    public void muovi() {
+    public void muovi(){
         System.out.println("Sei in: " + getLuogoCorrente());
 
         Direzione direzione = gestoreInput.leggiDirezioneConRetry();
@@ -70,21 +70,21 @@ public class Movimento {
      *
      * @param direzione la {@link Direzione} in cui muoversi
      */
-    public void muovi(Direzione direzione) {
+    public void muovi(Direzione direzione){
         int nuovaX = x;
         int nuovaY = y;
 
-        if (direzione == Direzione.NORD) {
+        if (direzione == Direzione.NORD){
             nuovaY--;
-        } else if (direzione == Direzione.SUD) {
+        } else if (direzione == Direzione.SUD){
             nuovaY++;
-        } else if (direzione == Direzione.EST) {
+        } else if (direzione == Direzione.EST){
             nuovaX++;
-        } else if (direzione == Direzione.OVEST) {
+        } else if (direzione == Direzione.OVEST){
             nuovaX--;
         }
 
-        if (mappa.isAttraversabile(nuovaX, nuovaY)) {
+        if (mappa.isAttraversabile(nuovaX, nuovaY)){
             x = nuovaX;
             y = nuovaY;
             System.out.println("Ti sei spostato in: " + getLuogoCorrente().getNome());

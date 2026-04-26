@@ -4,18 +4,18 @@ public class Oggetto {
     private final int valore; // es. punti salute o danno
     private final boolean consumabile;
 
-    public Oggetto(String nome, String descrizione, int valore) {
+    public Oggetto(String nome, String descrizione, int valore){
         this(nome, descrizione, valore, true);
     }
 
-    public Oggetto(String nome, String descrizione, int valore, boolean consumabile) {
+    public Oggetto(String nome, String descrizione, int valore, boolean consumabile){
         this.nome = nome;
         this.descrizione = descrizione;
         this.valore = valore;
         this.consumabile = consumabile;
     }
 
-    public boolean isConsumabile() {
+    public boolean isConsumabile(){
         return consumabile;
     }
 

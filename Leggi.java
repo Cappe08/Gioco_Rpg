@@ -5,7 +5,7 @@ public class Leggi {
     new BufferedReader(new InputStreamReader(System.in));
   private static String s;
 
-  public static boolean unBoolean() {
+  public static boolean unBoolean(){
     input();
     if (s != null && !s.equals("true") 
                   && !s.equals("false"))

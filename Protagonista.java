@@ -31,7 +31,7 @@ public class Protagonista extends Personaggio {
      * Sistema di Skill Check Deterministico.
      * Controlla se la statistica del giocatore è maggiore o uguale alla difficoltà.
      */
-    public boolean tentaAzione(String stat, int difficolta) {
+    public boolean tentaAzione(String stat, int difficolta){
         int valoreAttuale = 0;
         if (stat.equalsIgnoreCase("Forza")) valoreAttuale = forza;
         else if (stat.equalsIgnoreCase("Carisma")) valoreAttuale = carisma;
@@ -42,11 +42,11 @@ public class Protagonista extends Personaggio {
     }
 
     @Override
-    public String parla() {
+    public String parla(){
         return "Sono " + nome + ". E vincerò questa battaglia.";
     }
 
-    public void raccogli(Oggetto oggetto) {
+    public void raccogli(Oggetto oggetto){
         inventario.aggiungi(oggetto);
         System.out.println("Hai raccolto: " + oggetto.getNome());
     }
@@ -58,7 +58,7 @@ public class Protagonista extends Personaggio {
         bersaglio.subisciDanno(dannoTotale);
     }
 
-    public void stampaStato() {
+    public void stampaStato(){
         System.out.println("\n=== SCHEDA PERSONAGGIO: " + nome.toUpperCase() + " ===");
         System.out.println("Salute: " + salute + "/100 | Danno Base Arma: " + dannoArma);
         System.out.println("Forza: " + forza + " | Carisma: " + carisma + " | Agilità: " + agilita);

@@ -64,7 +64,7 @@ public class NPC extends Personaggio {
         System.out.println(parla());
         System.out.print("Rispondi (1=Chiedi info / 2=Saluta): ");
         int scelta = Leggi.unInt();
-        if (scelta == 1) {
+        if (scelta == 1){
             return nome + ": Il castello nasconde un antico segreto... cerca l'Ignoto!";
         }
         return nome + ": Buona fortuna, Rory!";
