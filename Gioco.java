@@ -6,41 +6,41 @@ public class Gioco {
     public static void main(String[] args){
         Mappa mappa = inizializzaMappa();
         Movimento movimento = new Movimento(mappa, 1, 1);
-        Protagonista tony = new Protagonista("Tony", "L'eroe in cerca di gloria.");
+        Protagonista tony = new Protagonista("Tony", "The hero in search of glory.");
         Map<String, Nemico> nemici = inizializzaNemici();
-        Missione missione = new Missione("Libera Dublino", new Indizio("Vittoria", "Pace fatta."));
+        Missione missione = new Missione("Free Dublin", new Indizio("Victory", "Peace made."));
 
-        System.out.println("=====================================");
-        System.out.println("  DUBLINO MEDIEVALE - IL GIOCO RPG   ");
-        System.out.println("=====================================");
+        System.out.println(" ");
+        System.out.println("Tony of Dublin: Tales from the Roxy Bar    ");
+        System.out.println(" ");
 
         gameLoop(tony, movimento, nemici, missione);
     }
 
     private static Mappa inizializzaMappa(){
         Mappa mappa = new Mappa(3, 3);
-        mappa.posizionaLuogo(0, 1, new Luogo("Roxy Bar", "Gente losca, musica e fumo."));
-        mappa.posizionaLuogo(1, 1, new Luogo("Piazza", "Il mercato delle illusioni."));
-        mappa.posizionaLuogo(2, 1, new Luogo("Torri", "Il patibolo dei giullari."));
-        mappa.posizionaLuogo(1, 0, new Luogo("Porta della Citta", "Cancelli bloccati da guardie."));
-        mappa.posizionaLuogo(1, 2, new Luogo("Castello", "La tana dell'Ignoto."));
+        mappa.posizionaLuogo(0, 1, new Luogo("Roxy Bar", "Shady people, music, and smoke."));
+        mappa.posizionaLuogo(1, 1, new Luogo("square", "The market of illusions."));
+        mappa.posizionaLuogo(2, 1, new Luogo("Towers", "The jesters' scaffold."));
+        mappa.posizionaLuogo(1, 0, new Luogo("City Gate", "Gates blocked by guards."));
+        mappa.posizionaLuogo(1, 2, new Luogo("Castle", "The lair of the Unknown."));
         return mappa;
     }
 
     private static Map<String, Nemico> inizializzaNemici(){
         Map<String, Nemico> nemici = new HashMap<>();
-        nemici.put("Porta della Citta", new Nemico("Guardia", "Uno scagnozzo", 70, 10));
-        nemici.put("Castello", new Gigante());
+        nemici.put("City Gate", new Nemico("Guard", "A thug", 70, 10));
+        nemici.put("Castle", new Gigante());
         return nemici;
     }
 
     private static void combatti(Protagonista tony, Nemico nemico, Map<String, Nemico> nemici, String luogo){
-        System.out.println("\nSCONTRO CON " + nemico.getNome().toUpperCase() + " !!!");
+        System.out.println("\nCLASH WITH " + nemico.getNome().toUpperCase() + " !!!");
         while(nemico.getSalute() > 0 && tony.getSalute() > 0){
             MotoreEpisodi.attendi(1000);
-            System.out.println("\nTu: " + tony.getSalute() + " HP | Nemico: " + nemico.getSalute() + " HP");
-            System.out.println("1). Attacca \n2). Cura (Pozione)");
-            System.out.print("Scelta: ");
+            System.out.println("\nYou: " + tony.getSalute() + " HP | Enemy: " + nemico.getSalute() + " HP");
+            System.out.println("1). Attack \n2). Heal (Potion)");
+            System.out.print("Choice: ");
 
             int scelta = Leggi.unInt();
 
@@ -56,7 +56,7 @@ public class Gioco {
             }
         }
         if(nemico.getSalute() <= 0){
-            System.out.println("\nNemico sconfitto! Questa area è ora tranquilla");
+            System.out.println("\nEnemy defeated! This area is now quiet");
             nemici.remove(luogo);
         }
     }
@@ -77,25 +77,24 @@ public class Gioco {
 
             System.out.println("\n");
             System.out.println("\n");
-            System.out.println("Sei in: " + luogoAttuale.getNome().toUpperCase());
+            System.out.println("You are in: " + luogoAttuale.getNome().toUpperCase());
             System.out.println(luogoAttuale.getDescrizione());
             System.out.println("\n");
             System.out.println("\n");
 
-            System.out.println("1. Muoviti \n2. Esamina / Interagisci  \n3. Zaino \n4. Stato");
+            System.out.println("1. Move \n2. Examine / Interact  \n3. Backpack \n4. Status");
             if(nemicoAttuale != null){
-                System.out.println("5. COMBATTI!");
+                System.out.println("5. FIGHT!");
             }
-            System.out.print("Scegli cosa fare (es: 1):  ");
+            System.out.print("Choose what to do (e.g., 1):  ");
             int scelta = Leggi.unInt();
 
             if(scelta == 1){
                 movimento.muovi();
-                System.out.println("\nTi stai muovendo tra i vicoli nebbiosi di Dublino");
+                System.out.println("\nYou are moving through the foggy alleys of Dublin");
                 MotoreEpisodi.attendi(800);
             }
             else if(scelta == 2){
-                // TUTTA LA LOGICA E' ORA DELEGATA AL MOTORE
                 MotoreEpisodi.gestisciInterazione(luogoAttuale.getNome(), tony, nemicoAttuale, nemici);
             }
             else if(scelta == 3){
@@ -106,35 +105,35 @@ public class Gioco {
             }
             else if(scelta == 5){
                 if(presenzaNemico == true){
-                    if(luogoAttuale.getNome().equals("Castello")){
-                        boolean guardieVive = nemici.containsKey("Porta della Citta");
+                    if(luogoAttuale.getNome().equals("Castle")){
+                        boolean guardieVive = nemici.containsKey("City Gate");
                         if(guardieVive){
                             MotoreEpisodi.attendi(1000);
-                            System.out.println("\n[!] BARRIERA MAGICA!");
+                            System.out.println("\n[!] MAGIC BARRIER!");
                             MotoreEpisodi.attendi(1500);
-                            System.out.println("Provi ad avvicinarti, ma una barriera di sangue impenetrabile ti respinge violentemente indietro!");
+                            System.out.println("You try to approach, but an impenetrable barrier of blood violently pushes you back!");
                             MotoreEpisodi.attendi(2500);
-                            System.out.println("Il Gigante ride: 'Sciocco! Finché le mie guardie vivono alla Porta della Città, il mio sigillo non può essere spezzato!'");
+                            System.out.println("The Giant laughs: 'Fool! As long as my guards live at the City Gate, my seal cannot be broken!'");
                             MotoreEpisodi.attendi(3000);
-                            System.out.println(">>> Devi sconfiggere la Guardia alla Porta prima di poter iniziare questo scontro.");
+                            System.out.println(">>> You must defeat the Guard at the Gate before starting this fight.");
                             MotoreEpisodi.attendi(2000);
                         } else {
                             MotoreEpisodi.combattiBossFinale(tony, nemicoAttuale, missione, nemici, luogoAttuale.getNome());
                         }
                     } else {
-                        if(luogoAttuale.getNome().equals("Porta della Citta")){
+                        if(luogoAttuale.getNome().equals("City Gate")){
                             MotoreEpisodi.preCombattimentoPorta(tony, nemicoAttuale);
                         }
                         combatti(tony, nemicoAttuale, nemici, luogoAttuale.getNome());
                     }
                 } else {
                     MotoreEpisodi.attendi(1000);
-                    System.out.println("\nTi guardi intorno con l'arma in pugno... ma non c'è nessuno da combattere qui.");
+                    System.out.println("\nYou look around with your weapon drawn... but there is no one to fight here.");
                     MotoreEpisodi.attendi(1500);
                 }
             } else {
                 MotoreEpisodi.attendi(500);
-                System.out.println("\nScelta non valida. Concentrati e riprova.");
+                System.out.println("\nInvalid choice. Focus and try again.");
                 MotoreEpisodi.attendi(1000);
             }
 

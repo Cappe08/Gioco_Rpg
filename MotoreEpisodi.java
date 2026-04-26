@@ -2,41 +2,38 @@ import java.util.Map;
 
 public class MotoreEpisodi {
 
-    // VARIABILI DI STATO DELLA STORIA (Spostate qui da Gioco.java)
     private static boolean episodioLocandaFatto = false;
     private static boolean episodioBarFatto = false;
     private static boolean episodioPiazzaFatto = false;
     private static boolean episodioTorriFatto = false;
 
-    // METODO PUBBLICO PER IL RITARDO (Così Gioco.java può usarlo senza duplicarlo)
     public static void attendi(int millisecondi){
         try { Thread.sleep(millisecondi); } catch(InterruptedException e){}
     }
 
-    // NUOVO METODO GESTISCI INTERAZIONE (Spostato da Gioco.java)
     public static void gestisciInterazione(String luogo, Protagonista tony, Nemico nemico, Map<String, Nemico> nemici){
         if(nemico != null){
-            if(luogo.equals("Porta della Citta")){
-                System.out.println("\n[ESAMINA]");
+            if(luogo.equals("City Gate")){
+                System.out.println("\n[EXAMINE]");
                 attendi(1000);
-                System.out.println("Ti nascondi dietro un carretto rovesciato per studiare la situazione.");
+                System.out.println("You hide behind an overturned cart to study the situation.");
                 attendi(2000);
-                System.out.println("Un manipolo di guardie corrotte blocca il passaggio, i loro volti sono celati da elmi neri come la pece.");
+                System.out.println("A handful of corrupted guards blocks the passage, their faces hidden by pitch-black helmets.");
                 attendi(2500);
-                System.out.println("Sembra che stiano canalizzando un'energia oscura e pulsante verso il Castello a sud attraverso un rituale empio.");
+                System.out.println("They seem to be channeling a dark, pulsating energy toward the Castle to the south through an unholy ritual.");
                 attendi(3000);
-                System.out.println("Finché queste guardie resteranno in vita, l'Ignoto trarrà potere da questo legame energetico per proteggersi...");
+                System.out.println("As long as these guards remain alive, the Unknown will draw power from this energy link to protect itself...");
                 attendi(2500);
-                System.out.println("\n(Sei pronto a spezzare questa maledizione? Premi 5 per sfoderare l'arma e affrontarli!)");
-            } else if(luogo.equals("Castello")){
-                System.out.println("\n[ESAMINA] Il Gigante Spettrale sovrasta le macerie.");
+                System.out.println("\n(Are you ready to break this curse? Press 5 to draw your weapon and face them!)");
+            } else if(luogo.equals("Castle")){
+                System.out.println("\n[EXAMINE] The Spectral Giant towers over the rubble.");
                 attendi(1500);
-                if(nemici.containsKey("Porta della Citta")){
-                    System.out.println("È circondato da un muro di energia rossa. È INATTACCABILE finché la fonte dell'energia non viene distrutta.");
+                if(nemici.containsKey("City Gate")){
+                    System.out.println("It is surrounded by a wall of red energy. It is UNASSAILABLE until the source of the energy is destroyed.");
                     attendi(3000);
                 } else {
-                    System.out.println("La barriera che lo proteggeva è svanita. Ora è vulnerabile!");
-                    System.out.println("(Premi 5 per avviare lo scontro finale!)");
+                    System.out.println("The barrier protecting it has vanished. It is now vulnerable!");
+                    System.out.println("(Press 5 to start the final showdown!)");
                     attendi(3000);
 
                 }
@@ -44,315 +41,314 @@ public class MotoreEpisodi {
             return;
         }
 
-        // LOGICA DEGLI EPISODI
         if(luogo.equals("Roxy Bar") && !episodioLocandaFatto){
             boolean successo = episodioLocanda(tony);
             if(successo){
                 episodioBarFatto = true;
                 episodioLocandaFatto = true;
             } else {
-                System.out.println("\n[!] Hai fallito. Riposati e riprova! (Premi di nuovo 2)");
+                System.out.println("\n[!] You failed. Rest and try again! (Press 2 again)");
             }
         }
-        else if(luogo.equals("Torri") && !episodioTorriFatto){
+        else if(luogo.equals("Towers") && !episodioTorriFatto){
             if(episodioBarFatto){
                 boolean successo = episodioTorri(tony);
                 if(successo){
                     episodioTorriFatto = true;
                 } else {
-                    System.out.println("\n[!] Hai perso. Preparati meglio e riprova! (Premi di nuovo 2)");
+                    System.out.println("\n[!] You lost. Prepare better and try again! (Press 2 again)");
                 }
             } else {
-                System.out.println("\nDue soldati incrociano le alabarde.");
-                System.out.println("Guardia: 'Vasco accetta solo chi si è dimostrato un duro al Roxy Bar. Vattene!'");
+                System.out.println("\nTwo soldiers cross their halberds.");
+                System.out.println("Guard: 'Vasco only accepts those who proved themselves tough at the Roxy Bar. Go away!'");
             }
         }
-        else if(luogo.equals("Piazza") && !episodioPiazzaFatto){
+        else if(luogo.equals("square") && !episodioPiazzaFatto){
             boolean successo = episodioPiazza(tony);
             if(successo){
                 episodioPiazzaFatto = true;
             } else {
-                System.out.println("\n[!] Hai fallito l'azione. Fai più attenzione e riprova!");
+                System.out.println("\n[!] You failed the action. Be more careful and try again!");
             }
         }
         else {
-            System.out.println("\nHai già completato tutto il possibile in questa zona.");
+            System.out.println("\nYou have already completed everything possible in this area.");
         }
     }
 
     public static boolean episodioLocanda(Protagonista tony){
-        System.out.println("\n=== IL ROXY BAR ===");
+        System.out.println("\n=== THE ROXY BAR ===");
         attendi(1000);
-        System.out.println("Spingi la pesante porta di quercia ed entri nel Roxy Bar. C'è un fumo denso e un odore acre di birra scura e legno marcio.");
+        System.out.println("You push the heavy oak door and enter the Roxy Bar. There is thick smoke and a pungent smell of dark beer and rotten wood.");
         attendi(2000);
-        System.out.println("Il rumore di boccali che sbattono e risate sguaiate riempie l'aria della taverna.");
+        System.out.println("The clinking of mugs and raucous laughter fills the tavern air.");
         attendi(1500);
-        System.out.println("In un angolo buio, un certo 'PUPO' sta giocando d'azzardo accanitamente con dei loschi figuri, imprecando in toscano ogni volta che i dadi rotolano.");
+        System.out.println("In a dark corner, a certain 'PUPO' is gambling fiercely with some shady figures, swearing in Tuscan every time the dice roll.");
         attendi(2500);
-        System.out.println("Dietro il bancone, Michela, una barista dai capelli rossi fiammanti, sta pulendo un bicchiere. Ti scruta con occhi che hanno visto troppe risse.");
+        System.out.println("Behind the counter, Michela, a bartender with fiery red hair, is cleaning a glass. She scrutinizes you with eyes that have seen too many brawls.");
         attendi(2500);
-        System.out.println("Michela: 'Non serviamo il tuo genere qui, straniero. A meno che tu non abbia oro sonante o una buona storia da raccontare.'");
+        System.out.println("Michela: 'We don't serve your kind here, stranger. Unless you have clinking gold or a good story to tell.'");
         attendi(2500);
 
-        System.out.println("\n1. [Diplomazia] Offri da bere a tutta la locanda e chiedi informazioni su Pupo e sul Castello. (Richiede Carisma 10)");
-        System.out.println("2. [Intimidazione] Sbatti i pugni sul bancone e pretendi di sapere chi comanda in questa bettola. (Richiede Forza 10)");
-        System.out.print("Scegli la tua mossa (1 o 2): ");
+        System.out.println("\n1. [Diplomacy] Buy a round for the whole tavern and ask about Pupo and the Castle. (Requires Charisma 10)");
+        System.out.println("2. [Intimidation] Slam your fists on the counter and demand to know who runs this joint. (Requires Strength 10)");
+        System.out.print("Choose your move (1 or 2): ");
         int scelta = Leggi.unInt();
 
         if(scelta == 1){
             attendi(1000);
-            System.out.println("\nMetti mano alla sacca e lanci un paio di monete sul bancone: 'Giro di birra per tutti! E per il signore toscano in fondo, la vostra annata migliore!'");
+            System.out.println("\nYou reach into your pouch and toss a few coins on the counter: 'A round of beer for everyone! And for the Tuscan gentleman in the back, your best vintage!'");
             if(tony.tentaAzione("Carisma", 10)){
                 attendi(2500);
-                System.out.println("\nLa locanda esplode in un boato di approvazione. I mercenari alzano i boccali verso di te.");
+                System.out.println("\nThe tavern erupts in a roar of approval. The mercenaries raise their mugs to you.");
                 attendi(2000);
-                System.out.println("Pupo ti fa l'occhiolino e intona una canzone stonata sulla fortuna.");
+                System.out.println("Pupo winks at you and sings an off-key song about luck.");
                 attendi(2000);
-                System.out.println("Michela sorride, rivelando un'expresione finalmente dolce: 'Sei uno che sa come farsi degli amici. Pupo è innocuo, ma l'Ignoto al Castello no.'");
+                System.out.println("Michela smiles, revealing a finally sweet expression: 'You know how to make friends. Pupo is harmless, but the Unknown at the Castle is not.'");
                 attendi(3000);
-                System.out.println("Michela: 'Hai la lingua sciolta, avventuriero. Questo ti servirà per farti strada alle Torri di Guardia.'");
+                System.out.println("Michela: 'You have a silver tongue, adventurer. This will help you make your way to the Guard Towers.'");
                 attendi(2000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni l'approvazione del locale e +5 Carisma.");
+                System.out.println("\n>>> YOU PASSED THE TEST! You get the tavern's approval and +5 Charisma.");
                 tony.modificaCarisma(5);
                 attendi(2000);
                 return true;
             } else {
                 attendi(2000);
-                System.out.println("\nLanci le monete, ma una cade a terra rotolando miseramente. Hai i soldi solo per un bicchiere d'acqua sporca.");
+                System.out.println("\nYou toss the coins, but one falls to the ground, rolling miserably. You only have money for a glass of dirty water.");
                 attendi(2500);
-                System.out.println("I mercenari ridono di te. Pupo ti lancia un dado in fronte urlando: 'Pezzente!'");
+                System.out.println("The mercenaries laugh at you. Pupo throws a die at your forehead, yelling: 'Beggar!'");
                 attendi(2000);
-                System.out.println("Michela scuote la testa: 'Torna quando avrai imparato le buone maniere. Ora sparisci.'");
+                System.out.println("Michela shakes her head: 'Come back when you've learned some manners. Now get lost.'");
                 attendi(2000);
-                System.out.println("Hai fallito l'approccio diplomatico.");
+                System.out.println("You failed the diplomatic approach.");
                 attendi(2000);
                 return false;
             }
         } else if(scelta == 2){
             attendi(1000);
-            System.out.println("\nTi avvicini a passi pesanti. Sferri un pugno violentissimo sul legno del bancone, facendo tremare i boccali di tutta la locanda.");
+            System.out.println("\nYou approach with heavy steps. You deliver a violent punch to the wooden counter, making the mugs of the whole tavern shake.");
             if(tony.tentaAzione("Forza", 10)){
                 attendi(2500);
-                System.out.println("\nIl tonfo echeggia nella stanza. Il bar cala in un silenzio tombale.");
+                System.out.println("\nThe thud echoes in the room. The bar falls into a dead silence.");
                 attendi(2000);
-                System.out.println("Pupo si rintana sotto il tavolo. I mercenari abbassano lo sguardo sulle loro birre, fingendo di non averti visto.");
+                System.out.println("Pupo cowers under the table. The mercenaries lower their gaze to their beers, pretending not to have seen you.");
                 attendi(2500);
-                System.out.println("Michela non batte ciglio, ma nei suoi occhi c'è una scintilla di rispetto: 'Hai fegato, ragazzo. Qui comanda chi ha i pugni più duri.'");
+                System.out.println("Michela doesn't bat an eye, but in her eyes there is a spark of respect: 'You've got guts, kid. Whoever has the hardest fists rules here.'");
                 attendi(3000);
-                System.out.println("Senza dire una parola, si china e ti allunga una fiala contenente un liquido rosso e denso.");
+                System.out.println("Without saying a word, she bends down and hands you a vial containing a thick, red liquid.");
                 attendi(2000);
-                System.out.println("Michela: 'Prendi questa 'Pozione del Roxy'. Se vai al Castello, ti servirà più dell'oro.'");
+                System.out.println("Michela: 'Take this 'Roxy Potion'. If you go to the Castle, you'll need it more than gold.'");
                 attendi(2000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni la Pozione e +5 Forza.");
-                tony.raccogli(new Oggetto("Pozione", "Cura 50 HP", -50, true));
+                System.out.println("\n>>> YOU PASSED THE TEST! You obtain the Potion and +5 Strength.");
+                tony.raccogli(new Oggetto("Pozione", "Heals 50 HP", -50, true));
                 tony.modificaForza(5);
                 attendi(2000);
                 return true;
             } else {
                 attendi(2000);
-                System.out.println("\nSferri un pugno, ma colpisci l'angolo di ferro del bancone. Senti un 'crack' imbarazzante e stringi i denti per non urlare.");
+                System.out.println("\nYou throw a punch, but you hit the iron corner of the counter. You hear an embarrassing 'crack' and grit your teeth to keep from screaming.");
                 attendi(2500);
-                System.out.println("Pupo scoppia in una risata fragorosa: 'L'ha preso lo spigolo! Maremma buhaiola!'");
+                System.out.println("Pupo bursts into a roaring laugh: 'He hit the edge! Bloody hell!'");
                 attendi(2000);
-                System.out.println("Michela ti guarda con compassione: 'Il mio bancone è più duro di te. Mettiti del ghiaccio su quella mano e vattene.'");
+                System.out.println("Michela looks at you with pity: 'My counter is harder than you. Put some ice on that hand and get out.'");
                 attendi(2500);
-                System.out.println("\nVieni deriso dall'intera locanda. Esci dal Roxy Bar massaggiandoti la mano. Subisci 10 Danni.");
+                System.out.println("\nYou are mocked by the whole tavern. You leave the Roxy Bar massaging your hand. You take 10 Damage.");
                 tony.subisciDanno(10);
                 attendi(2000);
                 return false;
             }
         } else {
             attendi(1000);
-            System.out.println("\nBalbetti qualcosa di incomprensibile. Michela ti indica la porta senza dire una parola.");
+            System.out.println("\nYou stammer something incomprehensible. Michela points to the door without saying a word.");
             attendi(2000);
             return false;
         }
     }
 
     public static boolean episodioPiazza(Protagonista tony){
-        System.out.println("\n=== IL MERCATO DELLE ILLUSIONI ===");
+        System.out.println("\n=== THE MARKET OF ILLUSIONS ===");
         attendi(1000);
-        System.out.println("La Piazza brulica di persone. L'aria è un misto di spezie orientali e fumo denso.");
+        System.out.println("The Square is teeming with people. The air is a mix of oriental spices and thick smoke.");
         attendi(1000);
-        System.out.println("Ti fai largo a fatica tra la folla, finché una mano ossuta non ti afferra il mantello.");
+        System.out.println("You struggle through the crowd until a bony hand grabs your cloak.");
         attendi(1000);
-        System.out.println("È Ezio, il mercante più losco di Dublino. Ha un sorriso viscido e un banchetto pieno di cianfrusaglie.");
+        System.out.println("It's Ezio, the shadiest merchant in Dublin. He has a slimy smile and a stall full of junk.");
         attendi(1000);
-        System.out.println("Ezio sussurra: 'Ehi, straniero! So che vai al Castello. Questa reliquia sacra ti renderà invincibile! Pagala o vattene!'");
+        System.out.println("Ezio whispers: 'Hey, stranger! I know you're going to the Castle. This sacred relic will make you invincible! Pay up or get lost!'");
 
-        System.out.println("\n1. [Percezione] Aguzza la vista per smascherare la truffa e rubagli qualcosa di utile. (Richiede Agilità 10)");
-        System.out.println("2. [Minaccia] Afferralo per il colletto e fagli sputare la merce vera. (Richiede Forza 15)");
-        System.out.print("Scegli la tua mossa (1 o 2): ");
+        System.out.println("\n1. [Perception] Sharpen your sight to expose the scam and steal something useful. (Requires Agility 10)");
+        System.out.println("2. [Threat] Grab him by the collar and make him spit out the real goods. (Requires Strength 15)");
+        System.out.print("Choose your move (1 or 2): ");
         int scelta = Leggi.unInt();
 
         if(scelta == 1){
             attendi(1000);
-            System.out.println("\nTi avvicini al banchetto, fingendo interesse per la patetica roccia dipinta che cerca di venderti...");
+            System.out.println("\nYou approach the stall, feigning interest in the pathetic painted rock he's trying to sell you...");
             if(tony.tentaAzione("Agilita", 10)){
                 attendi(1000);
-                System.out.println("\nCon la coda dell'occhio noti una fiala che brilla di luce vera nascosta nella sua manica.");
+                System.out.println("\nOut of the corner of your eye, you notice a vial glowing with real light hidden in his sleeve.");
                 attendi(1000);
-                System.out.println("Mentre Ezio gesticola, la tua mano scatta come un serpente e fai scivolare la fiala nella tua tasca.");
+                System.out.println("While Ezio gestures, your hand strikes like a snake and you slip the vial into your pocket.");
                 attendi(1000);
-                System.out.println("Ezio: 'Allora, compri o no? Bah, pezzente.' Ti allontani sorridendo col bottino.");
+                System.out.println("Ezio: 'So, are you buying or not? Bah, beggar.' You walk away smiling with the loot.");
                 attendi(1000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni la Pozione Magica e +5 Agilità.");
-                tony.raccogli(new Oggetto("Pozione Magica", "Cura 50 HP", -50, true));
+                System.out.println("\n>>> YOU PASSED THE TEST! You obtain the Magic Potion and +5 Agility.");
+                tony.raccogli(new Oggetto("Pozione Magica", "Heals 50 HP", -50, true));
                 tony.modificaAgilita(5);
                 return true;
             } else {
                 attendi(1000);
-                System.out.println("\nAllunghi la mano per frugare nelle sue tasche, ma sei goffo e fai cadere un mucchio di pentole.");
+                System.out.println("\nYou reach out to rummage through his pockets, but you're clumsy and knock over a pile of pots.");
                 attendi(1000);
-                System.out.println("Ezio urla: 'AL LADRO! AL LADRO!'");
+                System.out.println("Ezio screams: 'THIEF! THIEF!'");
                 attendi(1000);
-                System.out.println("La folla inizia a guardarti male e sei costretto a fuggire a mani vuote tra i vicoli.");
+                System.out.println("The crowd starts glaring at you, and you are forced to flee empty-handed through the alleys.");
                 attendi(1000);
-                System.out.println("Hai fallito il tentativo di furto.");
+                System.out.println("You failed the theft attempt.");
                 attendi(1000);
                 return false;
             }
         } else if(scelta == 2){
             attendi(1000);
-            System.out.println("\nNon hai tempo per questi giochetti. Afferri Ezio per le vesti logore e lo sollevi da terra con rabbia.");
+            System.out.println("\nYou don't have time for these games. You grab Ezio by his tattered clothes and angrily lift him off the ground.");
             if(tony.tentaAzione("Forza", 15)){
                 attendi(1000);
-                System.out.println("\nGli occhi del mercante si sbarrano per il terrore. I suoi piedi scalciano a vuoto.");
+                System.out.println("\nThe merchant's eyes widen in terror. His feet kick at the air.");
                 attendi(1000);
-                System.out.println("Ezio piagnucola: 'Calma! Era uno scherzo! Tieni la roba buona, ma lasciami andare!'");
+                System.out.println("Ezio whimpers: 'Easy! It was a joke! Take the good stuff, but let me go!'");
                 attendi(1000);
-                System.out.println("Ti getta addosso una fiala curativa e scappa a gambe levate abbandonando il banchetto.");
+                System.out.println("He throws a healing vial at you and runs away as fast as his legs can carry him, abandoning the stall.");
                 attendi(1000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni la Pozione e +5 Forza.");
-                tony.raccogli(new Oggetto("Pozione", "Cura 50 HP", -50, true));
+                System.out.println("\n>>> YOU PASSED THE TEST! You obtain the Potion and +5 Strength.");
+                tony.raccogli(new Oggetto("Pozione", "Heals 50 HP", -50, true));
                 tony.modificaForza(5);
                 attendi(2000);
                 return true;
             } else {
                 attendi(1000);
-                System.out.println("\nProvi a sollevarlo, ma la tua presa cede. Ezio si libera con uno strattone e fischia forte.");
+                System.out.println("\nYou try to lift him, but your grip slips. Ezio breaks free with a jerk and whistles loudly.");
                 attendi(1000);
-                System.out.println("Due enormi scagnozzi incappucciati emergono dalla folla e ti riempiono di botte prima che tu possa estrarre l'arma.");
+                System.out.println("Two huge hooded thugs emerge from the crowd and beat you up before you can draw your weapon.");
                 attendi(1000);
-                System.out.println("Ezio ride: 'Nessuno tocca Ezio senza pagare il prezzo!'");
+                System.out.println("Ezio laughs: 'No one touches Ezio without paying the price!'");
                 attendi(1000);
-                System.out.println("\nLe guardie di Ezio ti pestano a sangue. Subisci 15 Danni.");
+                System.out.println("\nEzio's guards beat you bloody. You take 15 Damage.");
                 attendi(2000);
                 tony.subisciDanno(15);
                 return false;
             }
         } else {
             attendi(1000);
-            System.out.println("\nTi guardi intorno confuso, ignorando Ezio. Lui ti scambia per uno sprovveduto e se ne va a cercare un'altra vittima.");
+            System.out.println("\nYou look around confused, ignoring Ezio. He mistakes you for a fool and walks away to find another victim.");
             attendi(2000);
             return false;
         }
     }
 
     public static boolean episodioTorri(Protagonista tony){
-        System.out.println("\n=== IL GIUDIZIO DELLE TORRI ===");
+        System.out.println("\n=== THE JUDGMENT OF THE TOWERS ===");
         attendi(1000);
-        System.out.println("Il vento freddo fischia tra le antiche pietre delle Torri di Guardia.");
+        System.out.println("The cold wind whistles through the ancient stones of the Guard Towers.");
         attendi(1500);
-        System.out.println("Al centro del cortile, il Comandante Vasco passeggia nervosamente davanti a un patibolo in legno.");
+        System.out.println("In the center of the courtyard, Commander Vasco paces nervously in front of a wooden scaffold.");
         attendi(2000);
-        System.out.println("In catene ci sono tre uomini dall'aspetto stravagante: tre giullari accusati di stonature moleste e disturbo della quiete pubblica.");
+        System.out.println("In chains are three extravagant-looking men: three jesters accused of annoying off-key singing and disturbing the peace.");
         attendi(2500);
 
-        System.out.println("\nLigabue sospira guardando a ovest: 'Voglio tornare al Roxy Bar, c'era un'atmosfera decisamente migliore...'");
+        System.out.println("\nLigabue sighs, looking west: 'I want to go back to the Roxy Bar, the atmosphere was definitely better... '");
         attendi(2500);
-        System.out.println("Jovanotti, saltellando sui talloni, cerca di sdrammatizzare: 'Ragazzi, pensate positivo! Magari è solo uno scherzo!'");
+        System.out.println("Jovanotti, bouncing on his heels, tries to lighten the mood: 'Guys, think positive! Maybe it's just a joke!'");
         attendi(2500);
-        System.out.println("Morgan scuote la testa, profondamente indignato: 'Questo è un affronto all'arte! Voi soldati non capite il mio genio polifonico!'");
+        System.out.println("Morgan shakes his head, deeply indignant: 'This is an affront to art! You soldiers don't understand my polyphonic genius!'");
         attendi(3000);
 
-        System.out.println("\nVasco sbatte il pugno sul tavolo e li zittisce con un urlo: 'Silenzio! Avete cantato l'ultima canzone. Il vostro tempo è scaduto!'");
+        System.out.println("\nVasco slams his fist on the table and silences them with a shout: 'Silence! You've sung your last song. Your time is up!'");
         attendi(2500);
-        System.out.println("Poi si gira verso di te, stringendo l'elsa del suo enorme spadone, e ti fulmina con lo sguardo: 'E tu chi saresti? Un loro fan?'");
+        System.out.println("Then he turns to you, gripping the hilt of his enormous broadsword, and glares at you: 'And who might you be? One of their fans?'");
         attendi(2000);
 
-        System.out.println("\n1. [Diplomazia] Fai un discorso appassionato sull'arte per chiedere la grazia. (Richiede Carisma 15)");
-        System.out.println("2. [Sfida] Estrai l'arma e sfida Vasco a duello per liberarli! (Richiede Forza 15)");
-        System.out.print("Scegli la tua mossa (1 o 2): ");
+        System.out.println("\n1. [Diplomacy] Give a passionate speech about art to ask for a pardon. (Requires Charisma 15)");
+        System.out.println("2. [Challenge] Draw your weapon and challenge Vasco to a duel to free them! (Requires Strength 15)");
+        System.out.print("Choose your move (1 or 2): ");
         int scelta = Leggi.unInt();
 
         if(scelta == 1){
             attendi(1000);
-            System.out.println("\nFai un passo avanti, alzi le mani disarmato e inizi a parlare di libertà, musica e pietà...");
+            System.out.println("\nYou step forward, raise your hands unarmed, and start talking about freedom, music, and mercy...");
             if(tony.tentaAzione("Carisma", 15)){
                 attendi(2000);
-                System.out.println("\nVasco ti ascolta in silenzio, quasi commosso. Poi abbassa l'arma e sbuffa: 'E va bene... mi hai convinto. Ma portateli via prima che cambi idea!'");
+                System.out.println("\nVasco listens to you in silence, almost moved. Then he lowers his weapon and snorts: 'Fine... you convinced me. But take them away before I change my mind!'");
                 attendi(3000);
-                System.out.println("I tre giullari vengono liberati.");
+                System.out.println("The three jesters are freed.");
                 attendi(1500);
-                System.out.println("Morgan ti si avvicina trionfante: 'Mio caro salvatore, la tua retorica è quasi paragonabile alla mia! Tieni questo oggetto, lo stavo analizzando ma ora è tuo.'");
+                System.out.println("Morgan approaches you triumphantly: 'My dear savior, your rhetoric is almost comparable to mine! Take this item, I was analyzing it but now it's yours.'");
                 attendi(3000);
-                System.out.println("Morgan inizia un discorso infinito sui microtoni e gli accordi diminuiti, ma tu afferri l'oggetto e scappi via prima di addormentarti.");
+                System.out.println("Morgan begins an endless speech about microtones and diminished chords, but you grab the item and run away before falling asleep.");
                 attendi(3000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni la Chiave Tattica e +5 Carisma.");
-                tony.raccogli(new Oggetto("Chiave Tattica", "Evita le imboscate", 0, false));
+                System.out.println("\n>>> YOU PASSED THE TEST! You obtain the Chiave Tattica and +5 Charisma.");
+                tony.raccogli(new Oggetto("Chiave Tattica", "Avoids ambushes", 0, false));
                 tony.modificaCarisma(5);
                 attendi(2000);
                 return true;
             } else {
                 attendi(2000);
-                System.out.println("\nInciampi sulle parole e perdi il filo del discorso. Vasco scoppia a ridere sguaiatamente.");
+                System.out.println("\nYou stumble over your words and lose your train of thought. Vasco bursts into loud laughter.");
                 attendi(2000);
-                System.out.println("Vasco: 'Che discorso patetico! Guardie, portate via i prigionieri!'");
+                System.out.println("Vasco: 'What a pathetic speech! Guards, take the prisoners away!'");
                 attendi(2000);
-                System.out.println("I giullari vengono trascinati via nelle segrete mentre Morgan urla: 'Incompetentiii!'");
+                System.out.println("The jesters are dragged away to the dungeons while Morgan screams: 'Incompetentss!'");
                 attendi(2000);
-                System.out.println("Hai fallito l'azione diplomatica.");
+                System.out.println("You failed the diplomatic action.");
                 attendi(2000);
                 return false;
             }
         } else if(scelta == 2){
             attendi(1000);
-            System.out.println("\nSfoderi l'arma con un gesto fulmineo e ti lanci verso il Comandante.");
+            System.out.println("\nYou draw your weapon with a lightning-fast motion and lunge at the Commander.");
             attendi(2000);
-            System.out.println("Vasco sorride maliziosamente: 'Finalmente un po' di azione! Fammi vedere di che pasta sei fatto!'");
+            System.out.println("Vasco smiles maliciously: 'Finally, some action! Show me what you're made of!'");
             if(tony.tentaAzione("Forza", 15)){
                 attendi(2000);
-                System.out.println("\nLo scontro è brutale! Le lame scintillano creando scintille nel cortile, ma la tua potenza è travolgente.");
+                System.out.println("\nThe clash is brutal! Blades flash, creating sparks in the courtyard, but your power is overwhelming.");
                 attendi(2500);
-                System.out.println("Con un colpo formidabile disarmi Vasco, che cade in ginocchio ansimando.");
+                System.out.println("With a formidable blow, you disarm Vasco, who falls to his knees panting.");
                 attendi(2000);
-                System.out.println("Vasco: 'Sei forte... troppo forte. Hai vinto. I giullari sono tuoi.'");
+                System.out.println("Vasco: 'You are strong... too strong. You win. The jesters are yours.'");
                 attendi(2000);
-                System.out.println("I canzonieri fuggono a gambe levate. Raccogli da terra l'arma caduta a Vasco, una lama di pregevole fattura.");
+                System.out.println("The singers flee as fast as they can. You pick up Vasco's fallen weapon from the ground, a blade of exquisite workmanship.");
                 attendi(3000);
-                System.out.println("\n>>> HAI SUPERATO LA PROVA! Ottieni l'arma di Vasco e +5 Forza.");
+                System.out.println("\n>>> YOU PASSED THE TEST! You obtain Vasco's weapon and +5 Strength.");
                 tony.setDannoArma(35);
                 tony.modificaForza(5);
                 attendi(2000);
                 return true;
             } else {
                 attendi(2000);
-                System.out.println("\nTi scagli contro Vasco, ma lui para il tuo colpo con irrisoria facilità.");
+                System.out.println("\nYou lunge at Vasco, but he parries your blow with laughable ease.");
                 attendi(2000);
-                System.out.println("Con un rapido contrattacco, ti colpisce in pieno petto facendoti volare a terra.");
+                System.out.println("With a quick counterattack, he strikes you squarely in the chest, sending you flying to the ground.");
                 attendi(2000);
-                System.out.println("Vasco ti guarda dall'alto verso il basso con disprezzo: 'Sei solo chiacchiere. Fuori dalla mia vista!'");
+                System.out.println("Vasco looks down at you with contempt: 'You're all talk. Out of my sight!'");
                 attendi(2500);
-                System.out.println("\nVasco ti umilia davanti a tutti. Subisci 30 danni.");
+                System.out.println("\nVasco humiliates you in front of everyone. You take 30 damage.");
                 attendi(2000);
                 tony.subisciDanno(30);
                 return false;
             }
         } else {
             attendi(1000);
-            System.out.println("\nRimani immobile e non fai una scelta valida. Vasco, infastidito, ti fa cacciare via dalle guardie.");
+            System.out.println("\nYou stand still and don't make a valid choice. Vasco, annoyed, has the guards throw you out.");
             attendi(2500);
             return false;
         }
     }
 
     public static void preCombattimentoPorta(Protagonista tony, Nemico guardia){
-        System.out.println("\n=== L'IMBOSCATA ALLA PORTA ===");
+        System.out.println("\n=== THE AMBUSH AT THE GATE ===");
         attendi(1000);
-        System.out.println("Ti avvicini ai pesanti cancelli della Porta della Città.");
+        System.out.println("You approach the heavy gates of the City Gate.");
         attendi(1500);
-        System.out.println("Un gruppo di guardie con armature annerite ti sbarra la strada. I loro occhi sono vuoti, asserviti alla magia del Gigante.");
+        System.out.println("A group of guards with blackened armor blocks your path. Their eyes are empty, enslaved by the Giant's magic.");
         attendi(2500);
 
         boolean haChiave = false;
@@ -361,129 +357,129 @@ public class MotoreEpisodi {
             if(o != null && o.getNome().equals("Chiave Tattica")) haChiave = true;
         }
 
-        System.out.println("\n1. [Tattica] Cerca un modo per usare l'ambiente a tuo vantaggio.");
-        System.out.println("2. [Assalto] Carica a testa bassa sfoderando l'arma! (Richiede Forza 15)");
-        System.out.print("Scegli la tua mossa (1 o 2): ");
+        System.out.println("\n1. [Tactics] Look for a way to use the environment to your advantage.");
+        System.out.println("2. [Assault] Charge head down with your weapon drawn! (Requires Strength 15)");
+        System.out.print("Choose your move (1 or 2): ");
         int scelta = Leggi.unInt();
 
         if(scelta == 1){
             attendi(1000);
-            System.out.println("\nScansi lo sguardo verso le mura e noti un argano arrugginito che regge una vecchia grata di ferro.");
+            System.out.println("\nYou glance toward the walls and notice a rusty winch holding up an old iron grate.");
             if(haChiave){
                 attendi(2000);
-                System.out.println("Usi la 'Chiave Tattica' donata da Morgan per sbloccare di scatto l'ingranaggio!");
+                System.out.println("You use the 'Chiave Tattica' given by Morgan to snap the gear open!");
                 attendi(2000);
-                System.out.println("CRASH! La pesante grata crolla addosso alle guardie prima ancora di sguainare la spada.");
+                System.out.println("CRASH! The heavy grate collapses on the guards before they even draw their swords.");
                 attendi(1500);
-                System.out.println("\n>>> VANTAGGIO TATTICO! Le guardie subiscono 30 Danni iniziali.");
+                System.out.println("\n>>> TACTICAL ADVANTAGE! The guards take 30 initial Damage.");
                 guardia.subisciDanno(30);
             } else {
                 attendi(2000);
-                System.out.println("Cerchi di manomettere l'argano, ma è bloccato. Ti servirebbe una chiave speciale...");
+                System.out.println("You try to tamper with the winch, but it's jammed. You would need a special key...");
                 attendi(2000);
-                System.out.println("Il rumore allerta le guardie che ti attaccano di sorpresa! Subisci 10 Danni.");
+                System.out.println("The noise alerts the guards who attack you by surprise! You take 10 Damage.");
                 tony.subisciDanno(10);
             }
         } else if(scelta == 2){
             attendi(1000);
-            System.out.println("\nCon un urlo di battaglia, ti lanci con ferocia inaudita contro lo schieramento nemico!");
+            System.out.println("\nWith a battle cry, you launch yourself with unprecedented ferocity against the enemy formation!");
             if(tony.tentaAzione("Forza", 15)){
                 attendi(2000);
-                System.out.println("Travolgi la prima linea con un impatto devastante, spezzando i loro scudi!");
+                System.out.println("You overrun the front line with a devastating impact, shattering their shields!");
                 attendi(1500);
-                System.out.println("\n>>> CARICA RIUSCITA! Le guardie subiscono 20 Danni iniziali.");
+                System.out.println("\n>>> CHARGE SUCCESSFUL! The guards take 20 initial Damage.");
                 guardia.subisciDanno(20);
             } else {
                 attendi(2000);
-                System.out.println("La tua carica è debole. I loro grossi scudi neri ti respingono violentemente all'indietro.");
+                System.out.println("Your charge is weak. Their large black shields violently push you back.");
                 attendi(2000);
-                System.out.println("Cadi a terra e subisci 15 Danni prima di poterti rialzare.");
+                System.out.println("You fall to the ground and take 15 Damage before you can get back up.");
                 tony.subisciDanno(15);
             }
         } else {
             attendi(1000);
-            System.out.println("\nEsiti troppo a lungo. Le guardie sogghignano e si preparano a colpirti.");
+            System.out.println("\nYou hesitate too long. The guards sneer and prepare to strike.");
         }
 
         attendi(2000);
-        System.out.println("\nCAPO DELLE GUARDIE: 'Il Gigante ci ha promesso la tua testa! PREPARATI A MORIRE!'");
+        System.out.println("\nCAPTAIN OF THE GUARDS: 'The Giant promised us your head! PREPARE TO DIE!'");
         attendi(1500);
     }
 
     public static void combattiBossFinale(Protagonista tony, Nemico boss, Missione m, Map<String, Nemico> nemici, String luogo){
         System.out.println("\n=======================================================");
         attendi(1500);
-        System.out.println("   LO SCONTRO FINALE ALL'ALTARE INSANGUINATO");
+        System.out.println("   THE FINAL SHOWDOWN AT THE BLOODY ALTAR");
         attendi(1500);
         System.out.println("=======================================================");
         attendi(2000);
 
-        System.out.println("Varchi la soglia del Castello in rovina. L'aria è densa di cenere e odora di zolfo e morte.");
+        System.out.println("You cross the threshold of the ruined Castle. The air is thick with ash and smells of sulfur and death.");
         attendi(2500);
-        System.out.println("Sull'Altare Insanguinato, il Gigante Spettrale ti attende. È una mostruosità di ossa e ombre, alta tre volte un uomo normale.");
+        System.out.println("On the Bloody Altar, the Spectral Giant awaits you. It is a monstrosity of bones and shadows, three times as tall as a normal man.");
         attendi(3000);
-        System.out.println("Il Gigante solleva la sua mazza colossale, indicandoti: 'Hai ucciso i miei servi... MA NON BASTERÀ A FERMARMI!'");
+        System.out.println("The Giant raises its colossal mace, pointing at you: 'You killed my servants... BUT IT WON'T BE ENOUGH TO STOP ME!'");
         attendi(3000);
-        System.out.println("Gigante: 'LA TUA ANIMA BRUCERÀ IN ETERNO! PREPARATI A PERIRE, INSETTO!'\n");
+        System.out.println("Giant: 'YOUR SOUL WILL BURN ETERNALLY! PREPARE TO PERISH, INSECT!'\n");
         attendi(3000);
 
         int turno = 1;
         while(boss.getSalute() > 0 && tony.getSalute() > 0){
-            System.out.println("\n--- TURNO " + turno + " | Tony: " + tony.getSalute() + " HP | Boss: " + boss.getSalute() + " HP ---");
+            System.out.println("\n--- TURN " + turno + " | Tony: " + tony.getSalute() + " HP | Boss: " + boss.getSalute() + " HP ---");
             attendi(1000);
-            System.out.println("1. Attacco Rapido | 2. Assalto (Forza 15) | 3. Provoca (Carisma 15) | 4. Cura (Pozione)");
-            System.out.print("Mossa: ");
+            System.out.println("1. Quick Attack | 2. Assault (Strength 15) | 3. Taunt (Charisma 15) | 4. Heal (Potion)");
+            System.out.print("Move: ");
             int mossa = Leggi.unInt();
 
             if(mossa == 4){
                 attendi(1000);
-                System.out.println("\nArretri di un passo, schivando un fendente per un soffio, e cerchi freneticamente nello zaino...");
+                System.out.println("\nYou step back, dodging a slash by a hair's breadth, and frantically search your backpack...");
                 attendi(1500);
                 usaPozioneInCombattimento(tony);
                 attendi(2000);
             } else if(mossa == 1){
                 attendi(1000);
-                System.out.println("\nScatti in avanti, sfruttando la tua agilità, e sferri una serie di fendenti rapidi per bucare la sua guardia oscura!");
+                System.out.println("\nYou dash forward, using your agility, and deliver a series of quick slashes to pierce its dark guard!");
                 attendi(2000);
                 tony.attacca(boss);
                 attendi(2000);
             } else if(mossa == 2){
                 attendi(1000);
-                System.out.println("\nStringi l'arma con entrambe le mani. I tuoi muscoli si tendono allo spasimo mentre carichi un colpo devastante...");
+                System.out.println("\nYou grip your weapon with both hands. Your muscles tense to the limit as you charge a devastating blow...");
                 attendi(2500);
                 if(tony.tentaAzione("Forza", 15)){
                     attendi(1000);
-                    System.out.println("COLPO DEVASTANTE! La tua lama fende l'aria con un fischio e squarcia in profondità l'armatura spettrale del mostro!");
+                    System.out.println("DEVASTATING BLOW! Your blade cleaves the air with a hiss and deeply tears the monster's spectral armor!");
                     attendi(2500);
                     boss.subisciDanno(45);
                 } else {
                     attendi(1000);
-                    System.out.println("Azione Fallita! L'arma sembra pesare tonnellate. Il Gigante para il tuo colpo goffo con un semplice gesto del braccio.");
+                    System.out.println("Action Failed! The weapon seems to weigh tons. The Giant parries your clumsy blow with a simple wave of its arm.");
                 }
                 attendi(2000);
             } else if(mossa == 3){
                 attendi(1000);
-                System.out.println("\nPunti la spada verso il mostro e urli a pieni polmoni: 'Sei solo un'ombra codarda nascosta tra le macerie! Non fai paura a nessuno!'");
+                System.out.println("\nYou point your sword at the monster and yell at the top of your lungs: 'You're just a cowardly shadow hiding in the rubble! You don't scare anyone!'");
                 attendi(3000);
                 if(tony.tentaAzione("Carisma", 15)){
                     attendi(1000);
-                    System.out.println("Le tue parole fanno breccia! Il Gigante esita, accecato dall'ira, e la sua aura magica si sfalda perdendo potere! (-15 HP)");
+                    System.out.println("Your words hit the mark! The Giant hesitates, blinded by wrath, and its magic aura crumbles, losing power! (-15 HP)");
                     attendi(3000);
                     boss.subisciDanno(15);
                 } else {
                     attendi(1000);
-                    System.out.println("La tua voce trema per la paura. Il Gigante ride con un boato che fa tremare le mura: 'LE TUE PAROLE SONO VENTO!'");
+                    System.out.println("Your voice trembles with fear. The Giant laughs with a roar that shakes the walls: 'YOUR WORDS ARE WIND!'");
                 }
                 attendi(2500);
             } else {
                 attendi(1000);
-                System.out.println("\nEsiti per un istante di troppo, sopraffatto dal terrore... e perdi la tua finestra di attacco!");
+                System.out.println("\nYou hesitate for a moment too long, overwhelmed by terror... and miss your attack window!");
                 attendi(2000);
             }
 
             if(boss.getSalute() > 0){
                 attendi(1000);
-                System.out.println("\nGli occhi del mostro brillano di malvagità. È il turno del Gigante...");
+                System.out.println("\nThe monster's eyes glow with malice. It is the Giant's turn...");
                 attendi(2000);
 
                 int danno;
@@ -493,28 +489,28 @@ public class MotoreEpisodi {
                     danno = 15;
                 }
                 if(turno % 3 == 0){
-                    System.out.println("Il Gigante solleva la sua immensa mazza e la fa schiantare al suolo! Un'onda d'urto di energia oscura ti investe in pieno!");
+                    System.out.println("The Giant raises its immense mace and slams it into the ground! A shockwave of dark energy hits you head-on!");
                 } else {
-                    System.out.println("Il Gigante sferra un rapido e violento attacco orizzontale con i suoi artigli d'ombra, cercando di falciarti a metà!");
+                    System.out.println("The Giant unleashes a rapid and violent horizontal attack with its shadow claws, trying to cut you in half!");
                 }
                 attendi(3000);
                 tony.subisciDanno(danno);
             }
 
             turno++;
-            attendi(2000); // Pausa prima di ricominciare il ciclo
+            attendi(2000);
         }
 
         if(boss.getSalute() <= 0){
             attendi(1500);
-            System.out.println("\n>>> IL GIGANTE CACCIA UN URLO STRAZIANTE CHE FA TREMARE LE FONDAMENTA DEL CASTELLO! <<<");
+            System.out.println("\n>>> THE GIANT LETS OUT AN AGONIZING SCREAM THAT SHAKES THE FOUNDATIONS OF THE CASTLE! <<<");
             attendi(3000);
-            System.out.println(">>> Il suo corpo si dissolve in un vortice di cenere e fumo nero, lasciando cadere la pesante mazza al suolo. <<<");
+            System.out.println(">>> Its body dissolves into a vortex of ash and black smoke, dropping the heavy mace to the ground. <<<");
             attendi(3000);
-            System.out.println(">>> L'alba sorge timida sulle rovine. HAI SALVATO LA CITTÀ DI DUBLINO! LA VITTORIA È TUA! <<<");
+            System.out.println(">>> Dawn rises timidly over the ruins. YOU HAVE SAVED THE CITY OF DUBLINO! VICTORY IS YOURS! <<<");
             attendi(3000);
             System.out.println("=======================================================");
-            System.out.println("               >>> HAI FINITO IL GIOCO <<<");
+            System.out.println("               >>> YOU HAVE FINISHED THE GAME <<<");
             System.out.println("=======================================================");
             attendi(2500);
             System.out.println(">>> Copyright CAPPELLARO CESARE, ZANINI FRANCESCO e SMAL ANDRII <<<");
@@ -534,7 +530,7 @@ public class MotoreEpisodi {
             Oggetto p = tony.getInventario().usa(idx);
             tony.subisciDanno(p.getValore());
         } else {
-            System.out.println("Non hai pozioni nello zaino!");
+            System.out.println("You don't have any potions in your backpack!");
         }
     }
 }

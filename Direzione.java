@@ -1,3 +1,3 @@
 public enum Direzione {
-    NORD, SUD, EST, OVEST
+NORD, SUD, EST, OVEST
 }
