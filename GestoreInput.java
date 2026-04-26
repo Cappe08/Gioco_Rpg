@@ -1,34 +1,3 @@
-/**
- * Gestisce la lettura dell'input utente dal terminale.
- *
- * <p><b>Responsabilita' (Single Responsibility):</b> convertire
- * i caratteri digitati dal giocatore in valori del tipo
- * {@link Direzione}, utilizzando esclusivamente la classe
- * {@link Leggi} fornita. Non contiene logica di movimento ne'
- * di gioco.</p>
- *
- * <p><b>Design scelto:</b> il metodo {@link #leggiDirezione()}
- * lancia una {@code IllegalArgumentException} quando l'input
- * non e' riconosciuto, rendendo esplicito l'errore. Per non
- * interrompere il flusso del gioco, il metodo
- * {@link #leggiDirezioneConRetry()} richiede ripetutamente
- * l'input finche' non ne riceve uno valido. In questo modo
- * {@link Movimento} rimane indipendente dalla sorgente
- * dell'input e la gestione degli errori e' centralizzata.</p>
- *
- * <p><b>Alternative possibili (solo commentate):</b></p>
- * <ul>
- *   <li><b>Scanner invece di Leggi:</b> si potrebbe usare
- *       {@code java.util.Scanner}, ma il progetto richiede
- *       l'utilizzo di {@link Leggi} gia' esistente.</li>
- *   <li><b>Ritorno di {@code null}:</b> invece di lanciare
- *       un'eccezione, si potrebbe restituire {@code null} e
- *       lasciare al chiamante il compito di verificare il
- *       risultato. Questo evita le eccezioni ma rende il codice
- *       meno esplicito e piu' soggetto a {@code NullPointerException}
- *       se il controllo viene dimenticato.</li>
- * </ul>
- */
 public class GestoreInput {
 
     /**
@@ -58,7 +27,7 @@ public class GestoreInput {
                 return Direzione.OVEST;
             default:
                 throw new IllegalArgumentException(
-                    "Direzione non riconosciuta. Usa w, a, s, d.");
+                        "Direzione non riconosciuta. Usa w, a, s, d.");
         }
     }
 
@@ -83,4 +52,3 @@ public class GestoreInput {
         }
     }
 }
-

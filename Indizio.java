@@ -1,7 +1,3 @@
-/**
- * Rappresenta un indizio che il giocatore puo raccogliere.
- * Gli indizi servono a scoprire il segreto del castello.
- */
 public class Indizio{
 
     private String nome;

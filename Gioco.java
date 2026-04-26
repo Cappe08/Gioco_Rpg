@@ -1,251 +1,146 @@
-/**
- * CLASSE PRINCIPALE DEL GIOCO - Orchestratore (Gioco.java)
- *
- * <p><b>Responsabilita':</b> coordinare l'avvio e il loop di gioco.
- * Ogni fase (inizializzazione mappa, NPC, nemici, missioni, game loop)
- * e' delegata a metodi privati statici per rispettare SRP e KISS.</p>
- *
- * <p><b>Design:</b> il metodo {@code main} e' ridotto a una sequenza
- * dichiarativa di chiamate. Il game loop delega ogni azione del menu
- * a un metodo dedicato. Le classi {@link Missione}, {@link Nemico},
- * {@link Gigante} e {@link Indizio} sono ora integralmente usate.</p>
- */
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Gioco {
 
     public static void main(String[] args) {
-        stampaBenvenuto();
-
-        // 1. Inizializzazione mondo di gioco
         Mappa mappa = inizializzaMappa();
-        Movimento movimento = new Movimento(mappa, 1, 1); // partenza in Piazza
-        Protagonista rory = new Protagonista("Rory", "Un giovane avventuriero coraggioso in cerca di gloria.");
-
+        Movimento movimento = new Movimento(mappa, 1, 1);
+        Protagonista tony = new Protagonista("Tony", "L'eroe in cerca di gloria.");
         Map<String, Nemico> nemici = inizializzaNemici();
-        Map<String, NPC> npcs = inizializzaNPC();
-        Missione missionePrincipale = inizializzaMissione();
-        npcs.get("Piazza").assegnaMissione(missionePrincipale);
+        Missione missione = new Missione("Libera Dublino", new Indizio("Vittoria", "Pace fatta."));
 
-        List<Indizio> indiziRaccolti = new ArrayList<>();
-
-        // Oggetto iniziale
-        rory.raccogli(new Oggetto("Spada arrugginita", "Un'arma semplice ma utile", 15, false));
-
-        System.out.println("Premi INVIO per iniziare l'avventura...");
-        Leggi.unoString();
-
-        // 2. Game loop
-        gameLoop(rory, movimento, npcs, nemici, missionePrincipale, indiziRaccolti);
-
-        System.out.println("\nGrazie per aver giocato a Dublino Medievale! Arrivederci, Rory.");
-    }
-
-    /* ================================================================ */
-    /*  SEZIONE AVVIO                                                   */
-    /* ================================================================ */
-
-    private static void stampaBenvenuto() {
         System.out.println("=====================================");
-        System.out.println("BENVENUTO IN DUBLINO MEDIEVALE - RPG");
+        System.out.println("  DUBLINO MEDIEVALE - IL GIOCO RPG   ");
         System.out.println("=====================================");
-        System.out.println("Protagonista: Rory\n");
+
+        gameLoop(tony, movimento, nemici, missione);
     }
 
     private static Mappa inizializzaMappa() {
         Mappa mappa = new Mappa(3, 3);
-        mappa.posizionaLuogo(0, 1, new Luogo("Locanda", "Una locanda accogliente piena di avventurieri che raccontano storie."));
-        mappa.posizionaLuogo(1, 1, new Luogo("Piazza", "La piazza centrale della citta, animata e rumorosa."));
-        mappa.posizionaLuogo(2, 1, new Luogo("Torri", "Le alte torri di guardia che dominano la citta."));
-        mappa.posizionaLuogo(1, 2, new Luogo("Castello", "Un castello cupo e misterioso... sembra nascondere un segreto."));
-        mappa.posizionaLuogo(1, 0, new Luogo("Porta della Citta", "L'ingresso principale, sorvegliato da guardie."));
+        mappa.posizionaLuogo(0, 1, new Luogo("Roxy Bar", "Gente losca, musica e fumo."));
+        mappa.posizionaLuogo(1, 1, new Luogo("Piazza", "Il mercato delle illusioni."));
+        mappa.posizionaLuogo(2, 1, new Luogo("Torri", "Il patibolo dei giullari."));
+        mappa.posizionaLuogo(1, 0, new Luogo("Porta della Citta", "Cancelli bloccati da guardie."));
+        mappa.posizionaLuogo(1, 2, new Luogo("Castello", "La tana dell'Ignoto."));
         return mappa;
     }
 
     private static Map<String, Nemico> inizializzaNemici() {
         Map<String, Nemico> nemici = new HashMap<>();
+        nemici.put("Porta della Citta", new Nemico("Guardia", "Uno scagnozzo", 70, 10));
         nemici.put("Castello", new Gigante());
         return nemici;
     }
 
-    private static Map<String, NPC> inizializzaNPC() {
-        Map<String, NPC> npcs = new HashMap<>();
-        npcs.put("Locanda", new NPC("Michela", "La locandiera gentile.", "Ciao Rory! Hai sentito del tesoro nascosto nel castello? Parla con Eoin in piazza!"));
-        npcs.put("Piazza", new NPC("Eoin", "Il mercante chiacchierone.", "Ehi Rory! La citta e in pericolo. L'Ignoto nel castello sa tutto..."));
-        npcs.put("Torri", new NPC("Vanno", "La guardia delle torri.", "Benvenuto straniero. Le torri sono sicure... per ora."));
-        npcs.put("Castello", new NPC("Ignoto", "Una figura misteriosa incappucciata.", "Finalmente sei arrivato, Rory... il segreto e qui. Ma dovrai combattere!"));
-        return npcs;
+    private static void combatti(Protagonista tony, Nemico nemico, Map<String, Nemico> nemici, String luogo) {
+        System.out.println("\nSCONTRO CON " + nemico.getNome().toUpperCase() + " !!!");
+        while (nemico.getSalute() > 0 && tony.getSalute() > 0) {
+            MotoreEpisodi.attendi(1000);
+            System.out.println("\nTu: " + tony.getSalute() + " HP | Nemico: " + nemico.getSalute() + " HP");
+            System.out.println("1). Attacca \n2). Cura (Pozione)");
+            System.out.print("Scelta: ");
+
+            int scelta = Leggi.unInt();
+
+            if (scelta == 2) {
+                MotoreEpisodi.usaPozioneInCombattimento(tony);
+            } else {
+                tony.attacca(nemico);
+            }
+
+            if (nemico.getSalute() > 0) {
+                MotoreEpisodi.attendi(1000);
+                nemico.attacca(tony);
+            }
+        }
+        if (nemico.getSalute() <= 0) {
+            System.out.println("\nNemico sconfitto! Questa area è ora tranquilla");
+            nemici.remove(luogo);
+        }
     }
 
-    private static Missione inizializzaMissione() {
-        Indizio ricompensa = new Indizio("Pergamena Antica", "Il tesoro di Dublino e nascosto sotto la torre piu alta del castello.");
-        return new Missione("Sconfiggi il Gigante che minaccia il castello", ricompensa);
-    }
-
-    /* ================================================================ */
-    /*  SEZIONE GAME LOOP                                               */
-    /* ================================================================ */
-
-    private static void gameLoop(Protagonista rory, Movimento movimento,
-                                 Map<String, NPC> npcs, Map<String, Nemico> nemici,
-                                 Missione missione, List<Indizio> indiziRaccolti) {
+    private static void gameLoop(Protagonista tony, Movimento movimento, Map<String, Nemico> nemici, Missione missione) {
         boolean inGioco = true;
         while (inGioco) {
-            Luogo corrente = movimento.getLuogoCorrente();
-            stampaLuogoCorrente(corrente);
 
-            NPC npcPresente = npcs.get(corrente.getNome());
-            Nemico nemicoPresente = nemici.get(corrente.getNome());
+            Luogo luogoAttuale = movimento.getLuogoCorrente();
+            Nemico nemicoAttuale = nemici.get(luogoAttuale.getNome());
+            boolean presenzaNemico;
 
-            if (npcPresente != null) {
-                System.out.println("Qui c'e " + npcPresente.getNome() + "!");
-            }
-            if (nemicoPresente != null) {
-                System.out.println("Attenzione! " + nemicoPresente.getNome() + " ti blocca il passo!");
+            if (nemicoAttuale == null) {
+                presenzaNemico = false;
+            } else {
+                presenzaNemico = true;
             }
 
-            int scelta = leggiSceltaMenu();
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("Sei in: " + luogoAttuale.getNome().toUpperCase());
+            System.out.println(luogoAttuale.getDescrizione());
+            System.out.println("\n");
+            System.out.println("\n");
 
-            switch (scelta) {
-                case 1:
-                    movimento.muovi();
-                    break;
-                case 2:
-                    interagisciConNPC(npcPresente);
-                    break;
-                case 3:
-                    rory.getInventario().mostra();
-                    break;
-                case 4:
-                    usaOggetto(rory);
-                    break;
-                case 5:
-                    rory.stampaStato();
-                    break;
-                case 6:
-                    if (nemicoPresente != null) {
-                        combatti(rory, nemicoPresente, missione, indiziRaccolti, nemici, corrente.getNome());
+            System.out.println("1. Muoviti \n2. Esamina / Interagisci  \n3. Zaino \n4. Stato");
+            if (nemicoAttuale != null) {
+                System.out.println("5. COMBATTI!");
+            }
+            System.out.print("Scegli cosa fare (es: 1):  ");
+            int scelta = Leggi.unInt();
+
+            if (scelta == 1) {
+                movimento.muovi();
+                System.out.println("\nTi stai muovendo tra i vicoli nebbiosi di Dublino");
+                MotoreEpisodi.attendi(800);
+            }
+            else if (scelta == 2) {
+                // TUTTA LA LOGICA E' ORA DELEGATA AL MOTORE
+                MotoreEpisodi.gestisciInterazione(luogoAttuale.getNome(), tony, nemicoAttuale, nemici);
+            }
+            else if (scelta == 3) {
+                tony.getInventario().mostra();
+            }
+            else if (scelta == 4) {
+                tony.stampaStato();
+            }
+            else if (scelta == 5) {
+                if (presenzaNemico == true) {
+                    if (luogoAttuale.getNome().equals("Castello")) {
+                        boolean guardieVive = nemici.containsKey("Porta della Citta");
+                        if (guardieVive) {
+                            MotoreEpisodi.attendi(1000);
+                            System.out.println("\n[!] BARRIERA MAGICA!");
+                            MotoreEpisodi.attendi(1500);
+                            System.out.println("Provi ad avvicinarti, ma una barriera di sangue impenetrabile ti respinge violentemente indietro!");
+                            MotoreEpisodi.attendi(2500);
+                            System.out.println("Il Gigante ride: 'Sciocco! Finché le mie guardie vivono alla Porta della Città, il mio sigillo non può essere spezzato!'");
+                            MotoreEpisodi.attendi(3000);
+                            System.out.println(">>> Devi sconfiggere la Guardia alla Porta prima di poter iniziare questo scontro.");
+                            MotoreEpisodi.attendi(2000);
+                        } else {
+                            MotoreEpisodi.combattiBossFinale(tony, nemicoAttuale, missione, nemici, luogoAttuale.getNome());
+                        }
                     } else {
-                        System.out.println("Non c'e nessuno da combattere qui.");
+                        if (luogoAttuale.getNome().equals("Porta della Citta")) {
+                            MotoreEpisodi.preCombattimentoPorta(tony, nemicoAttuale);
+                        }
+                        combatti(tony, nemicoAttuale, nemici, luogoAttuale.getNome());
                     }
-                    break;
-                case 7:
-                    mostraMissioneEIndizi(missione, indiziRaccolti);
-                    break;
-                case 8:
-                    System.out.print("Sei sicuro di voler uscire? (true/false): ");
-                    inGioco = !Leggi.unBoolean();
-                    break;
-                default:
-                    System.out.println("Scelta non valida. Riprova.");
+                } else {
+                    MotoreEpisodi.attendi(1000);
+                    System.out.println("\nTi guardi intorno con l'arma in pugno... ma non c'è nessuno da combattere qui.");
+                    MotoreEpisodi.attendi(1500);
+                }
+            } else {
+                MotoreEpisodi.attendi(500);
+                System.out.println("\nScelta non valida. Concentrati e riprova.");
+                MotoreEpisodi.attendi(1000);
             }
 
-            if (rory.getSalute() <= 0) {
-                System.out.println("GAME OVER - Rory e caduto in battaglia!");
+            if ((tony.getSalute() <= 0) || missione.isCompletata()) {
                 inGioco = false;
             }
         }
     }
-
-    private static void stampaLuogoCorrente(Luogo luogo) {
-        System.out.println("\n=== " + luogo.getNome() + " ===");
-        System.out.println(luogo.getDescrizione());
-    }
-
-    private static int leggiSceltaMenu() {
-        System.out.println("\nCosa vuoi fare?");
-        System.out.println("1. Muoviti");
-        System.out.println("2. Parla con NPC (se presente)");
-        System.out.println("3. Mostra inventario");
-        System.out.println("4. Usa oggetto dall'inventario");
-        System.out.println("5. Stampa stato Rory");
-        System.out.println("6. Combatti nemico (se presente)");
-        System.out.println("7. Mostra missioni e indizi");
-        System.out.println("8. Esci dal gioco");
-        System.out.print("Scelta (1-8): ");
-        return Leggi.unInt();
-    }
-
-    /* ================================================================ */
-    /*  SEZIONE AZIONI DI GIOCO                                         */
-    /* ================================================================ */
-
-    private static void interagisciConNPC(NPC npc) {
-        if (npc != null) {
-            System.out.println(npc.parlaConScelta());
-        } else {
-            System.out.println("Non c'e nessuno con cui parlare qui.");
-        }
-    }
-
-    private static void usaOggetto(Protagonista rory) {
-        rory.getInventario().mostra();
-        System.out.print("Quale oggetto vuoi usare? (numero): ");
-        int idx = Leggi.unInt() - 1;
-        Oggetto oggetto = rory.getInventario().get(idx);
-        if (oggetto == null) {
-            System.out.println("Scelta non valida.");
-            return;
-        }
-        if (!oggetto.isConsumabile()) {
-            System.out.println(oggetto.getNome() + " non e consumabile. Non puoi usarlo cosi.");
-            return;
-        }
-        Oggetto usato = rory.getInventario().usa(idx);
-        if (usato != null) {
-            // valore negativo = cura (subisciDanno con valore negativo aumenta la salute)
-            rory.subisciDanno(-usato.getValore());
-        }
-    }
-
-    private static void combatti(Protagonista rory, Nemico nemico, Missione missione,
-                                 List<Indizio> indiziRaccolti, Map<String, Nemico> nemici,
-                                 String nomeLuogo) {
-        int turno = 0;
-        while (nemico.getSalute() > 0 && rory.getSalute() > 0) {
-            turno++;
-            System.out.println("\n--- Turno " + turno + " ---");
-            System.out.println("Rory attacca " + nemico.getNome() + "!");
-            rory.attacca(nemico);
-
-            if (nemico.getSalute() <= 0) {
-                System.out.println(nemico.getNome() + " e stato sconfitto!");
-                nemici.remove(nomeLuogo);
-                if (!missione.isCompletata()) {
-                    missione.completaMissione();
-                    Indizio ricompensa = missione.daiRicompensa();
-                    if (ricompensa != null) {
-                        indiziRaccolti.add(ricompensa);
-                    }
-                }
-                return;
-            }
-
-            // Turno del nemico
-            if (nemico instanceof Gigante && turno % 2 == 0) {
-                ((Gigante) nemico).attaccoSpeciale(rory);
-            } else {
-                nemico.attacca(rory);
-            }
-        }
-    }
-
-    private static void mostraMissioneEIndizi(Missione missione, List<Indizio> indiziRaccolti) {
-        System.out.println("\n=== MISSIONE ATTIVA ===");
-        System.out.println("Obiettivo: " + missione.getDescrizione());
-        System.out.println("Stato: " + (missione.isCompletata() ? "Completata" : "In corso"));
-
-        if (indiziRaccolti.isEmpty()) {
-            System.out.println("Indizi raccolti: nessuno.");
-        } else {
-            System.out.println("Indizi raccolti:");
-            for (Indizio i : indiziRaccolti) {
-                System.out.println(" - " + i.esamina());
-            }
-        }
-    }
 }
-

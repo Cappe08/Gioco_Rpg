@@ -1,7 +1,3 @@
-/**
- * Rappresenta un nemico nel gioco.
- * Estende Personaggio aggiungendo un valore di danno per gli attacchi.
- */
 public class Nemico extends Personaggio {
 
     private int danno;

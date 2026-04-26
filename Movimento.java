@@ -1,41 +1,3 @@
-/**
- * Gestisce il movimento del personaggio giocante sulla {@link Mappa}.
- *
- * <p><b>Responsabilita' (Single Responsibility):</b> tenere traccia
- * della posizione corrente (x,y) del giocatore e applicare gli
- * spostamenti richiesti tramite l'enum {@link Direzione}.
- * La lettura dell'input da terminale e' stata estratta in
- * {@link GestoreInput}: in questo modo {@code Movimento} non dipende
- * piu' direttamente da {@link Leggi} e risulta facilmente testabile
- * con unit test (e' possibile chiamare {@code muovi(Direzione)}
- * passando direttamente la direzione desiderata, senza leggere
- * dall'utente).</p>
- *
- * <p><b>Design scelto:</b> il costruttore richiede solo la
- * {@link Mappa} e le coordinate di partenza. Il metodo
- * {@link #muovi()} delega la lettura a {@link GestoreInput} e
- * poi applica lo spostamento chiamando {@link #muovi(Direzione)}.
- * Questo pattern e' chiamato <i>Template Method</i> semplificato:
- * l'orchestrazione rimane in {@code muovi()}, mentre la logica pura
- * dello spostamento e' isolata in {@code muovi(Direzione)}.</p>
- *
- * <p><b>Alternative possibili (solo commentate):</b></p>
- * <ul>
- *   <li><b>Iniezione di GestoreInput:</b> si potrebbe passare
- *       {@link GestoreInput} al costruttore di {@code Movimento}
- *       invece di crearlo internamente. Questo renderebbe ancora
- *       piu' flessibile la classe (si potrebbe sostituire
- *       {@code GestoreInput} con una versione che legge da file
- *       o da rete), ma per semplicita' attuale la dipendenza e'
- *       istanziata direttamente.</li>
- *   <li><b>Ritorno del risultato:</b> {@code muovi(Direzione)}
- *       potrebbe restituire un {@code boolean} (true se lo
- *       spostamento e' avvenuto, false altrimenti) o un oggetto
- *       {@code RisultatoMovimento} con informazioni piu' dettagliate.
- *       Attualmente il risultato e' comunicato con {@code System.out}
- *       per semplicita'.</li>
- * </ul>
- */
 public class Movimento {
     private int x;
     private int y;
@@ -56,7 +18,7 @@ public class Movimento {
         this.mappa = mappa;
         if (!mappa.isAttraversabile(xIniziale, yIniziale)) {
             throw new IllegalArgumentException(
-                "Posizione iniziale non valida: (" + xIniziale + "," + yIniziale + ")");
+                    "Posizione iniziale non valida: (" + xIniziale + "," + yIniziale + ")");
         }
         this.x = xIniziale;
         this.y = yIniziale;

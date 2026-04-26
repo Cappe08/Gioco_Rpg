@@ -1,7 +1,3 @@
-/**
- * Il Gigante e il nemico finale del gioco.
- * Ha piu salute degli altri nemici e puo usare un attacco speciale potente.
- */
 public class Gigante extends Nemico{
 
     public Gigante(){

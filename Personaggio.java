@@ -1,8 +1,3 @@
-/**
- * Classe astratta che rappresenta un generico personaggio nel gioco.
- * Contiene gli attributi e i metodi comuni a tutti i personaggi:
- * Protagonista, NPC, Nemico e Gigante.
- */
 public abstract class Personaggio {
 
     protected final String nome;

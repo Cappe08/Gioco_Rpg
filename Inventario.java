@@ -1,10 +1,3 @@
-/**
- * Classe che gestisce l'inventario del protagonista.
- *
- * <p><b>Responsabilita:</b> contenere e manipolare oggetti (usa array o ArrayList come nelle dispense 1.3 Array e 4.2 Strutture dati).</p>
- *
- * <p><b>Design:</b> composizione con Protagonista. Limite massimo di oggetti per realismo RPG.</p>
- */
 import java.util.ArrayList;
 import java.util.List;
 

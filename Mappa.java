@@ -1,29 +1,3 @@
-/**
- * Gestisce la disposizione spaziale dei luoghi sul piano di gioco.
- *
- * <p><b>Responsabilita' (Single Responsibility):</b> contenere la
- * griglia dei luoghi e fornire metodi per posizionarli, recuperarli
- * e verificare lo stato di una cella.</p>
- *
- * <p><b>Design scelto:</b> griglia 2D tramite array di
- * {@link Luogo}. E' la struttura dati piu' semplice e immediata da
- * comprendere per chi si avvicina al progetto. Le coordinate seguono
- * la convenzione (x,y) dove x e' la colonna (orizzontale) e y e' la
- * riga (verticale), con origine (0,0) in alto a sinistra.</p>
- *
- * <p><b>Alternative possibili (solo commentate):</b></p>
- * <ul>
- *   <li><b>Mappa sparsa (HashMap):</b> se la mappa diventa molto
- *       grande ma con pochi luoghi, un {@code Map<Coordinate, Luogo>}
- *       ridurrebbe la memoria occupata. L'accesso resterebbe O(1)
- *       ma la verifica dei confini richiederebbe logica aggiuntiva.</li>
- *   <li><b>Grafo:</b> se il gioco richiede collegamenti non
- *       ortogonali (es. portali, teletrasporti, strade a senso unico),
- *       ogni {@link Luogo} potrebbe essere un nodo con una lista di
- *       archi verso i vicini. Questo e' piu' flessibile ma anche piu'
- *       complesso da visualizzare in una griglia.</li>
- * </ul>
- */
 public class Mappa {
     private final Luogo[][] griglia;
     private final int larghezza;
@@ -39,7 +13,7 @@ public class Mappa {
     public Mappa(int larghezza, int altezza) {
         if (larghezza <= 0 || altezza <= 0) {
             throw new IllegalArgumentException(
-                "Le dimensioni della mappa devono essere positive.");
+                    "Le dimensioni della mappa devono essere positive.");
         }
         this.larghezza = larghezza;
         this.altezza = altezza;
@@ -58,7 +32,7 @@ public class Mappa {
     public void posizionaLuogo(int x, int y, Luogo luogo) {
         if (!coordinateValide(x, y)) {
             throw new IllegalArgumentException(
-                "Coordinate fuori dai limiti: (" + x + "," + y + ")");
+                    "Coordinate fuori dai limiti: (" + x + "," + y + ")");
         }
         griglia[y][x] = luogo;
     }
@@ -110,4 +84,3 @@ public class Mappa {
         return altezza;
     }
 }
-

@@ -1,7 +1,3 @@
-/**
- * Rappresenta una missione che un NPC puo assegnare al giocatore.
- * Quando la missione e completata, il giocatore riceve un indizio come ricompensa.
- */
 public class Missione {
 
     private String descrizione;

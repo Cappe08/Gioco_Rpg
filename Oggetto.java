@@ -1,10 +1,3 @@
-/**
- * Classe che rappresenta un oggetto raccoglibile nel gioco.
- *
- * <p><b>Responsabilita:</b> memorizzare nome, descrizione ed effetto (es. cura, arma).</p>
- *
- * <p><b>Design:</b> POJO immutabile come Luogo.java del compagno.</p>
- */
 public class Oggetto {
     private final String nome;
     private final String descrizione;
