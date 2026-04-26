@@ -12,22 +12,17 @@ public class GestoreInput {
         System.out.print("Dove vuoi andare? (w=su, s=giu, d=dx, a=sx): ");
         char c = Leggi.unChar();
 
-        switch (c) {
-            case 'w':
-            case 'W':
-                return Direzione.NORD;
-            case 's':
-            case 'S':
-                return Direzione.SUD;
-            case 'd':
-            case 'D':
-                return Direzione.EST;
-            case 'a':
-            case 'A':
-                return Direzione.OVEST;
-            default:
-                throw new IllegalArgumentException(
-                        "Direzione non riconosciuta. Usa w, a, s, d.");
+        if (c == 'w' || c == 'W') {
+            return Direzione.NORD;
+        } else if (c == 's' || c == 'S') {
+            return Direzione.SUD;
+        } else if (c == 'd' || c == 'D') {
+            return Direzione.EST;
+        } else if (c == 'a' || c == 'A') {
+            return Direzione.OVEST;
+        } else {
+            throw new IllegalArgumentException(
+                    "Direzione non riconosciuta. Usa w, a, s, d.");
         }
     }
 

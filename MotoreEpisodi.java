@@ -486,7 +486,12 @@ public class MotoreEpisodi {
                 System.out.println("\nGli occhi del mostro brillano di malvagità. È il turno del Gigante...");
                 attendi(2000);
 
-                int danno = (turno % 3 == 0) ? 35 : 15;
+                int danno;
+                if (turno % 3 == 0) {
+                    danno = 35;
+                } else {
+                    danno = 15;
+                }
                 if (turno % 3 == 0) {
                     System.out.println("Il Gigante solleva la sua immensa mazza e la fa schiantare al suolo! Un'onda d'urto di energia oscura ti investe in pieno!");
                 } else {

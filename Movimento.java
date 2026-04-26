@@ -74,19 +74,14 @@ public class Movimento {
         int nuovaX = x;
         int nuovaY = y;
 
-        switch (direzione) {
-            case NORD:
-                nuovaY--;
-                break;
-            case SUD:
-                nuovaY++;
-                break;
-            case EST:
-                nuovaX++;
-                break;
-            case OVEST:
-                nuovaX--;
-                break;
+        if (direzione == Direzione.NORD) {
+            nuovaY--;
+        } else if (direzione == Direzione.SUD) {
+            nuovaY++;
+        } else if (direzione == Direzione.EST) {
+            nuovaX++;
+        } else if (direzione == Direzione.OVEST) {
+            nuovaX--;
         }
 
         if (mappa.isAttraversabile(nuovaX, nuovaY)) {
